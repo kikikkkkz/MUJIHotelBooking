@@ -2,6 +2,15 @@
 require_once('initialize.php');
 include('header.php');
 
+//unset the last session of the checkin and checkout date
+// if (isset($_SESSION['check_in'])) {
+// 	unset($_SESSION['check_in']);
+// }
+// if (isset($_SESSION['check_out'])) {
+// 	unset($_SESSION['check_out']);
+// }
+
+
 if(is_post_request()) {
 	if(isset($_POST['checkIn'])) $checkIn = $_POST['checkIn'];
 	if(isset($_POST['checkOut'])) $checkOut = $_POST['checkOut'];
@@ -9,6 +18,10 @@ if(is_post_request()) {
 	//save to session
 	$_SESSION['check_in'] = $checkIn;
 	$_SESSION['check_out'] = $checkOut;
+
+	
+	echo "Check In | $checkIn<br />"; 
+	echo "Check Out | $checkOut";
 }
 
 
@@ -62,8 +75,8 @@ if(is_post_request()) {
 		<th>Check Out </th></tr>
 		
 		<tr>
-			<td><input type="text" name="checkIn" id="checkIn" placeholder="When to arrive"> </td>
-			<td><input type="text" name="checkOut" id="checkOut" placeholder="When to leave"> </td>
+			<td><input type="text" name="checkIn" id="checkIn" placeholder="When to arrive" value="<?php if(isset($_POST['checkIn'])) echo $_POST['checkIn'] ?>"> </td>
+			<td><input type="text" name="checkOut" id="checkOut" placeholder="When to leave" value="<?php if(isset($_POST['checkOut'])) echo $_POST['checkOut'] ?>"> </td>
 			<td><input type="submit" id="search" value="Search"></td>
 		</tr>
 		
