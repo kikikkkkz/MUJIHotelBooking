@@ -16,7 +16,7 @@ a.nav { color:white; text-decoration: none;}
 </tr>
 <tr height="30" bgcolor="#bdc3c7">
 <td style="font-family:verdana;font-size:20px;color:white;">
-<strong><a class="nav"  href="<?php echo url_for('home.php'); ?>">Home</a> | 
+<strong><a class="nav"  href="<?php echo url_for('search.php'); ?>">Home</a> | 
 <strong><a class="nav"  href="<?php echo url_for('room.php'); ?>">View rooms</a> | 
 
 <?php 
