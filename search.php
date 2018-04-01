@@ -19,9 +19,10 @@ if(is_post_request()) {
 	$_SESSION['check_in'] = $checkIn;
 	$_SESSION['check_out'] = $checkOut;
 
+	redirect_to(url_for('searchresult.php'));
 	
-	echo "Check In | $checkIn<br />"; 
-	echo "Check Out | $checkOut";
+	// echo "Check In | $checkIn<br />"; 
+	// echo "Check Out | $checkOut";
 }
 
 
@@ -69,7 +70,7 @@ if(is_post_request()) {
 <body>
 
 	<br /><h1>Start your booking</h1>
-	<form action="searchresult.php" method="post">
+	<form action="search.php" method="post">
 		<table>
 		<tr><th>Check In </th>
 		<th>Check Out </th></tr>
