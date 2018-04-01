@@ -21,19 +21,25 @@ if($stmt->fetch()) {
 	Country: $country1<br><br>";
 	echo "</p>";
 }
+$stmt->free_result();
 
-$query_str = "SELECT bookingNumber FROM reservation WHERE memberNumber = ?";
-			  
+echo "<p>";
+echo "Your Reservation:<br>";
+
+$query_str = "SELECT bookingNumber, checkInDate, checkOutDate
+			  FROM reservation
+			  WHERE memberNumber=?";
+
 $stmt = $db->prepare($query_str);
 $stmt->bind_param('i',$id);
 $stmt->execute();
-$stmt->bind_result($booking1);;
+$stmt->bind_result($booking1,$checkin1,$checkout1);;
 
 if($stmt->fetch()) {
-	echo "<p>";
-	echo "Your Reservation: $booking1";
-	echo "</p>";
+	echo "Booking Number $booking1 | $checkin1 ~ $checkout1";
+	echo "<br>";
 }
+echo "</p>";
 
 include('footer.php');
 
