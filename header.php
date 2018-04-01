@@ -6,16 +6,18 @@
 <head>
 <title>MUJI hotel</title>
 <style>
+* {font-family:Georgia;}
 a.nav { color:white; text-decoration: none;}
+a { color:34495e; text-decoration: none; font-family:verdana;}
 </style>
 </head>
 <body>
 <table style="width:100%;border-spacing:0px">
 <tr style="height:100px;background-color:60a3bc">
-<th style="font-family:verdana;font-size:54px;color:white;">MUJI hotel</th>
+<th style="font-family:verdana;font-size:54px;color:white;"><img src="images/logo.svg" width="180px" /></th>
 </tr>
 <tr height="30" bgcolor="#bdc3c7">
-<td style="font-family:verdana;font-size:20px;color:white;">
+<td style="font-family:verdana;font-size:18px;color:white;">
 <strong><a class="nav"  href="<?php echo url_for('search.php'); ?>">Home</a> | 
 <strong><a class="nav"  href="<?php echo url_for('room.php'); ?>">View rooms</a> | 
 

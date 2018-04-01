@@ -26,18 +26,17 @@ $stmt->free_result();
 echo "<p>";
 echo "Your Reservation:<br>";
 
-$query_str = "SELECT bookingNumber, checkInDate, checkOutDate
-			  FROM reservation
-			  WHERE memberNumber=?";
+$query_str = "SELECT bookingNumber, checkInDate, checkOutDate, priceEach, roomType FROM reservation WHERE memberNumber=?";
 
 $stmt = $db->prepare($query_str);
 $stmt->bind_param('i',$id);
 $stmt->execute();
-$stmt->bind_result($booking1,$checkin1,$checkout1);;
+$stmt->bind_result($booking1,$checkin1,$checkout1,$price1,$room1);;
 
 if($stmt->fetch()) {
 	echo "Booking Number $booking1 | $checkin1 ~ $checkout1";
 	echo "<br>";
+	echo "Type $room1 RMB $price1 /night";
 }
 echo "</p>";
 

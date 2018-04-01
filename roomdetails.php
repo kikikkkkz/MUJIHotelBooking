@@ -12,9 +12,14 @@ $stmt->bind_result($room1,$descroption1,$bedtype1,$area1,$occupant1,$price1,$ima
 
 include('header.php');
 
+echo "<a href=";
+echo url_for('room.php');
+echo ">Back to room list</a> ";
+
 //display results
 if($stmt->fetch()) {
 	echo "<h3>Type $room</h3>\n";
+	echo "<div id=\"room-image\"><img src=$image1 width=\"300\" height=\"200\" alt=\"\" /></div>";
 	echo "<p>";
 	echo "Area $area1 m<sup>2</sup><br>
 	Bed Type | $bedtype1 <br>
@@ -23,6 +28,7 @@ if($stmt->fetch()) {
 	Room Rate RMB $price1 /night<br>
 	<em>Breakfast, Tax & Service Charge Included</em><br>
 	<strong>Standard complimentary items and fixtures</strong><br>$descroption1<br>";
+	// echo "$image1";
 	echo "</p>";
 }
 
@@ -35,7 +41,7 @@ echo "<input type=\"radio\" name=\"bed\" value=\"double\" checked> Double
 echo "<br>";
 echo "<input type=\"submit\" value=\"Book\">";
 if($_SESSION['callback_url']!=url_for('reservation.php')){
-	$_SESSION['room']=$room; //product viewed on watchlist will not be added again 
+	$_SESSION['room']=$room; //room viewed on reservation will not be added again 
 }
 echo "</form>";
 

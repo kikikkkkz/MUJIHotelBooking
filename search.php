@@ -54,9 +54,9 @@ if(is_post_request()) {
 </head>
 
 <body>
-</body>
+
 	<br /><h1>Start your booking</h1>
-	<form action="searchResult.php" method="post">
+	<form action="searchresult.php" method="post">
 		<table>
 		<tr><th>Check In </th>
 		<th>Check Out </th></tr>
@@ -69,7 +69,7 @@ if(is_post_request()) {
 		
 		</table>
 	</form>
-
+</body>
 
 </html>
 
