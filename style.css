@@ -1,0 +1,175 @@
+/**{
+	border: 1px solid black;
+
+}*/
+/*body {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	color: black;
+}
+
+p {
+	font-size: 16px;
+}
+
+a:link {
+	font-size: 16px;
+	text-decoration: none;
+	color: #34495e;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #34495e;
+}
+
+ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none; /*remove the dots*/
+}
+
+/*change selection colour*/
+::selection {
+	color: #fff;
+	background-color: #333;
+}
+
+::-moz-selection {
+	color: #fff;
+	background-color: #333;
+}
+
+/*fix the content*/
+.clearfix::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+
+
+* {
+	box-sizing: border-box;
+}
+body {
+	font-family: 'Roboto', sans-serif;
+	line-height: 1.6;
+	margin: 0;
+	min-height: 100vh;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+h2,
+h3,
+a {
+	color: #34495e;
+}
+
+a {
+	text-decoration: none;
+}
+
+
+
+.logo {
+	padding: 0.3em;
+	font-size: 1.45em;
+	margin-left: 1em;
+}
+
+.main-nav {
+	margin-top: 5px;
+
+}
+
+.logo a,
+.main-nav a {
+	padding: 10px 15px;
+	text-transform: uppercase;
+	text-align: center;
+	letter-spacing: 0.5px;
+	display: block;
+}
+
+.main-nav a {
+	color: #34495e;
+	font-size: .99em;
+}
+
+.main-nav a:hover {
+	color: #718daa;
+}
+
+
+.header {
+	padding: 0.4em;
+	background-color: rgba(0,0,0,0.3);
+}
+
+.cover {
+	background-size: cover;
+	background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+
+/* ================================= 
+  Media Queries
+==================================== */
+
+@media (min-width: 769px) {
+	.header,
+	.main-nav {
+		display: flex;
+	}
+	.header {
+		flex-direction: column;
+		align-items: center;
+    	.header{
+		width: 80%;
+		margin: 0 auto;
+		max-width: 1150px;
+	}
+	}
+
+}
+
+@media (min-width: 1025px) {
+	.header {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+}
+
+/*page setup*/
+.room {
+	padding: 1em;
+}
+
+.details {
+	padding: 1em;
+}
+
+.login{
+	padding: 1em;
+}
+
+.register{
+	padding: 1em;
+}
+
+.search{
+	padding: 1em;
+}
+
+
+
+
+

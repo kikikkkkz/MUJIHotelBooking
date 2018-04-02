@@ -13,6 +13,7 @@ $stmt->bind_result($room1,$descroption1,$bedtype1,$area1,$occupant1,$price1,$ima
 $page_title = 'Room Details';
 include('header.php');
 
+echo "<div class=\"details\">";
 echo "<a href=";
 echo url_for('room.php');
 echo ">Back to room list</a> ";
@@ -46,6 +47,7 @@ if($_SESSION['callback_url']!=url_for('reservation.php')){
 	$_SESSION['room']=$room; //room viewed on reservation will not be added again 
 }
 echo "</form>";
+echo "</div>";
 
 include('footer.php');
 

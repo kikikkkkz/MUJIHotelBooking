@@ -41,59 +41,58 @@ if(is_post_request()) {
 <?php $page_title = 'Register'; ?>
 <?php include('header.php'); ?>
 
-<div id="content">
+<div class="register">
 
   <a class="back-link" href="<?php echo url_for('login.php'); ?>">&laquo; Back to Login</a>
 
-  <div class="admin new">
     <h1>Create Account</h1>
 
     <?php echo display_errors($errors); ?>
 
     <form action="<?php echo url_for('register.php'); ?>" method="post">
-      <dl>
-        <dt>First name</dt>
-        <dd><input type="text" name="first_name" value="<?php echo h($admin['first_name']); ?>" /></dd>
-      </dl>
+      <table cellspacing="10">
+      <tr>
+        <td>First name</td>
+        <td><input type="text" name="first_name" value="<?php echo h($admin['first_name']); ?>" /></td>
+      </tr>
 
-      <dl>
-        <dt>Last name</dt>
-        <dd><input type="text" name="last_name" value="<?php echo h($admin['last_name']); ?>" /></dd>
-      </dl>
+      <tr>
+        <td>Last name</td>
+        <td><input type="text" name="last_name" value="<?php echo h($admin['last_name']); ?>" /></td>
+      </tr>
 
-      <dl>
-        <dt>Email</dt>
-        <dd><input type="text" name="email" value="<?php echo h($admin['email']); ?>" /><br /></dd>
-      </dl>
+      <tr>
+        <td>Email</td>
+        <td><input type="text" name="email" value="<?php echo h($admin['email']); ?>" /><br /></td>
+      </tr>
 
-      <dl>
-        <dt>Phone Number</dt>
-        <dd><input type="text" name="phone_number" value="<?php echo h($admin['phone_number']); ?>" /><br /></dd>
-      </dl>
+      <tr>
+        <td>Phone Number</td>
+        <td><input type="text" name="phone_number" value="<?php echo h($admin['phone_number']); ?>" /><br /></td>
+      </tr>
 
-      <dl>
-        <dt>Country</dt>
-        <dd><input type="text" name="country" value="<?php echo h($admin['country']); ?>" /><br /></dd>
-      </dl>
+      <tr>
+        <td>Country</td>
+        <td><input type="text" name="country" value="<?php echo h($admin['country']); ?>" /><br /></td>
+      </tr>
 
-      <dl>
-        <dt>Password</dt>
-        <dd><input type="password" name="password" value="" /></dd>
-      </dl>
+      <tr>
+        <td>Password</td>
+        <td><input type="password" name="password" value="" /></td>
+      </tr>
 
-      <dl>
-        <dt>Confirm Password</dt>
-        <dd><input type="password" name="confirm_password" value="" /></dd>
-      </dl>
+      <tr>
+        <td>Confirm Password</td>
+        <td><input type="password" name="confirm_password" value="" /></td>
+      </tr>
       
       <br />
+      <tr>
+        <td><input type="submit" value="Create Account" /></td>
+      </tr>
 
-      <div id="operations">
-        <input type="submit" value="Create Account" />
-      </div>
+    </table>
     </form>
-
-  </div>
 
 </div>
 

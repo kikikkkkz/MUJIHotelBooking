@@ -50,7 +50,7 @@ if(is_post_request()) {
 
 ?>
 
-<div id="content">
+<div class="login">
   <h1>Log in</h1>
 
   <?php echo display_errors($errors); ?>

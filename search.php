@@ -86,8 +86,8 @@ $_SESSION['callback_url']=url_for('search.php');
 </head>
 
 <body>
-
-	<br /><h1>Start your booking</h1>
+    <div class="search">
+	<h1>Start your booking</h1>
 
 	<?php echo display_errors($errors); ?>
 
@@ -104,6 +104,7 @@ $_SESSION['callback_url']=url_for('search.php');
 		
 		</table>
 	</form>
+    </div>
 </body>
 
 </html>

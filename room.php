@@ -4,7 +4,7 @@ require_once('initialize.php');
 $page_title = 'Room Choice';
 include('header.php');
 
-echo "<h2>Rooms</h2>";
+echo "<div class=\"room\"><h2>Rooms</h2>";
 //session the url address
 $_SESSION['callback_url']=url_for('room.php');
 
@@ -20,6 +20,8 @@ while($row = $res->fetch_row()){
 	echo "</li>\n";
 };
 echo "</ul>";
+echo "</div>";
+
 
 //unset session product
 if(isset($_SESSION['room'])){
