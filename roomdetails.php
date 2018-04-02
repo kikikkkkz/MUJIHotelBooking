@@ -33,16 +33,28 @@ if($stmt->fetch()) {
 	// echo "$image1";
 	echo "</p>";
 }
+$stmt->free_result();
 
-//booking information
-echo "<form action=\"reservation.php\" method=\"POST\">";
-echo "No. of Room(s) | 1<br>";
-echo "Number of Guest(s) <select name=\"occupants\"><option value=\"1\">1</option><option value=\"2\">2</option></select>";
-echo "<br>";
-echo "<input type=\"radio\" name=\"bed\" value=\"double\" checked> Double 
-  <input type=\"radio\" name=\"bed\" value=\"twin\"> Twin<br>";
-echo "<br>";
-echo "<input type=\"submit\" value=\"Book\">";
+//print out comments for the room type
+$query_str = "SELECT content, timePosted FROM comment WHERE roomType = '".$room."'";
+			  
+$res = $db->query($query_str);
+
+echo "<p>";
+echo "<strong>Comments</strong><br>";
+if($res->num_rows > 0) {
+	while ($row = $res->fetch_assoc()) {
+		echo $row['content']." | ".$row['timePosted']."<br>";
+	}
+}else{
+	echo "No comments."; //show 0 result it there is nothing matched 
+}
+echo "</p>";
+$res->free_result();
+
+//check availability
+echo "<form action=\"\" method=\"POST\">";
+echo "<input type=\"submit\" value=\"Check Availability\">";
 if($_SESSION['callback_url']!=url_for('reservation.php')){
 	$_SESSION['room']=$room; //room viewed on reservation will not be added again 
 }
@@ -51,7 +63,6 @@ echo "</div>";
 
 include('footer.php');
 
-$stmt->free_result();
 $db->close();
 ?>
 

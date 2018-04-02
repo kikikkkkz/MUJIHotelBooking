@@ -44,7 +44,7 @@ $res = $db->query($query_str);
 
 
 //debugging
-//echo "<br />$query_str";
+echo "<br />$query_str";
 
 //prinitng out the number of results
 echo "<br /><br /><strong>".$res->num_rows."</strong> types of rooms are available.";
@@ -84,6 +84,8 @@ if($res->num_rows > 0) {
 
 echo "</div>";
 
+$res->free_result();
+$db->close();
 
 ?>
 
