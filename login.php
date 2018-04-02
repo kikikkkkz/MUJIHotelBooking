@@ -56,14 +56,16 @@ if(is_post_request()) {
   <?php echo display_errors($errors); ?>
 
   <form action="login.php" method="post">
-    Email:<br />
-    <input type="text" name="email" value="<?php echo $email; ?>" /><br />
-    Password:<br />
-    <input type="password" name="password" value="" /><br /><br />
-    <input type="submit" name="login" value="Login"  />
+    <table cellspacing="10">
+    <tr><td>Email</td></tr>
+    <tr><td><input type="text" name="email" value="<?php echo $email; ?>" /></td></tr>
+    <tr><td>Password</td></tr>
+    <tr><td><input type="password" name="password" value="" /></td></tr>
+    <tr><td><input type="submit" name="login" value="Login"  /></td></tr>
+    </table>
   </form>
 
-  Not registered yet? <a href="register.php">Register here.</a>
+  Not registered yet? <button type="button"><a href="register.php"> Register here</a></button>
 
 </div>
 

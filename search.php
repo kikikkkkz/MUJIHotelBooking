@@ -7,12 +7,6 @@ include('header.php');
 $errors = [];
 $checkIn = $checkOut = '';
 
-// if(isset($_SESSION['check_in'])){
-//     unset($_SESSION['check_in']);
-// }
-// if(isset($_SESSION['check_out'])){
-//     unset($_SESSION['check_out']);
-// }
 
 if(is_post_request()) {
 	if(isset($_POST['checkIn'])) $checkIn = $_POST['checkIn'];
@@ -91,6 +85,7 @@ $_SESSION['callback_url']=url_for('search.php');
 
 	<?php echo display_errors($errors); ?>
 
+    <div class="search1">
 	<form action="search.php" method="post">
 		<table>
 		<tr><th>Check-in </th>
@@ -104,6 +99,7 @@ $_SESSION['callback_url']=url_for('search.php');
 		
 		</table>
 	</form>
+    </div>
     </div>
 </body>
 

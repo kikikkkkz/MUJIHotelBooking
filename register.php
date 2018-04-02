@@ -43,8 +43,6 @@ if(is_post_request()) {
 
 <div class="register">
 
-  <a class="back-link" href="<?php echo url_for('login.php'); ?>">&laquo; Back to Login</a>
-
     <h1>Create Account</h1>
 
     <?php echo display_errors($errors); ?>
@@ -88,10 +86,13 @@ if(is_post_request()) {
       
       <br />
       <tr>
-        <td><input type="submit" value="Create Account" /></td>
+        <td><br /><input type="submit" value="Create Account" /></td>
       </tr>
 
     </table>
+
+      Already a member? <button type="button"><a class="back-link" href="<?php echo url_for('login.php'); ?>">Login here</a></button>  
+
     </form>
 
 </div>

@@ -14,20 +14,20 @@ $page_title = 'Room Details';
 include('header.php');
 
 echo "<div class=\"details\">";
-echo "<a href=";
+echo "<button type=\"button\"><a href=";
 echo url_for('room.php');
-echo ">Back to room list</a> ";
+echo ">&laquo; Back to room list</a></button> ";
 
 //display results
 if($stmt->fetch()) {
-	echo "<h3>Type $room</h3>\n";
-	echo "<div id=\"room-image\"><img src=$image1 width=\"300\" height=\"200\" alt=\"\" /></div>";
+	echo "<h3>TYPE $room</h3>\n";
+	echo "<div id=\"room-image\"><img src=$image1 width=\"500\" height=\"333\" alt=\"\" /></div>";
 	echo "<p>";
 	echo "Area $area1 m<sup>2</sup><br>
 	Bed Type | $bedtype1 <br>
 	1-$occupant1 Occupants<br>
-	Check-in｜ 14:00<br>Check-out｜ 12:00<br>
-	Room Rate RMB $price1 /night<br>
+	Check-in｜ 14:00<br>Check-out｜ 12:00<br><br>
+	Room Rate <b>RMB $price1</b> /night<br>
 	<em>Breakfast, Tax & Service Charge Included</em><br>
 	<strong>Standard complimentary items and fixtures</strong><br>$descroption1<br>";
 	// echo "$image1";

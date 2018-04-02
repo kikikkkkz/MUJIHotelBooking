@@ -1,33 +1,10 @@
 /**{
 	border: 1px solid black;
-
 }*/
-/*body {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
-	color: black;
-}
 
-p {
-	font-size: 16px;
-}
 
-a:link {
-	font-size: 16px;
-	text-decoration: none;
-	color: #34495e;
-}
 
-a:visited {
-	text-decoration: none;
-	color: #34495e;
-}
 
-ul{
-	margin: 0;
-	padding: 0;
-	list-style-type: none; /*remove the dots*/
-}
 
 /*change selection colour*/
 ::selection {
@@ -48,15 +25,15 @@ ul{
 }
 
 
-
 * {
 	box-sizing: border-box;
 }
 body {
 	font-family: 'Roboto', sans-serif;
 	line-height: 1.6;
-	margin: 0;
 	min-height: 100vh;
+	color: #34495e;
+	margin: 0;
 }
 ul {
   margin: 0;
@@ -65,14 +42,24 @@ ul {
 }
 
 
+h3 {
+	letter-spacing: 1px;
+}
+
 h2,
 h3,
 a {
 	color: #34495e;
 }
 
-a {
+a:link {
 	text-decoration: none;
+	color: #34495e;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #34495e;
 }
 
 
@@ -151,27 +138,94 @@ a {
 /*page setup*/
 .room {
 	padding: 1em;
+	text-align: center;
 }
 
+/*roomdetails css*/
 .details {
 	padding: 1em;
 }
 
+.details p{
+	width: 60%;
+}
+
+/*login css*/
 .login{
 	padding: 1em;
+	text-align: center;
 }
 
-.register{
+.login table {
+	margin: auto;
+}
+
+
+/*register css*/
+.register {
 	padding: 1em;
+	text-align: center;
 }
 
+.register button{
+	text-align: left;
+}
+
+.register table {
+	margin: auto;
+}
+
+.register tr, th, td {
+	padding: 0 0.2em;
+}
+
+/*search css*/
 .search{
 	padding: 1em;
+	text-align: center;
 }
 
+.search table {
+	margin:auto;
+	padding: 0;
+}
+
+.search tr, th, td{
+	padding: 0 0.2em;
+}
+
+
+/*searchresult css*/
 .result{
 	padding: 1em;
 }
+
+.result h3 {
+	text-align: center;
+}
+
+.section {
+	text-align: center;
+}
+
+.section p {
+	width: 70%;
+	margin: auto;
+}
+
+.box {
+	display: inline-block;
+	width: 50%;
+	float: left;
+	padding: 1em;
+}
+
+
+
+#room-image {
+	width: 100%;
+}
+
 
 
 
