@@ -29,26 +29,29 @@ echo "<p>All trips, whether for business, sightseeing or long-term stays, are su
 
 //set sql query string and get the results from database
 $query_str = "SELECT DISTINCT room.roomType, roomtype.roomTypeDescription, 
-			  roomtype.bedType, roomtype.area, roomtype.numberOfOccupants, 
-			  roomtype.price, roomtype.image 
+			  roomtype.bedType, roomtype.area, roomtype.numberOfOccupants, roomtype.price, roomtype.image 
 			  FROM room
-			  LEFT JOIN availability ON room.roomNumber = availability.roomNumber
 			  LEFT JOIN roomtype ON room.roomType = roomtype.roomType
-			  WHERE availability.roomNumber IS NULL
-			  OR availability.fromDate <= '".$checkIn."' 
-			  AND availability.fromDate >= '".$checkOut."' 
-			  AND availability.toDate >='".$checkIn."' 
-			  AND availability.toDate >= '".$checkOut."'";
+			  WHERE room.roomNumber NOT IN
+			  (	SELECT roomNumber 
+				FROM reservation
+				WHERE checkInDate <= '".$checkIn."' AND checkOutDate > '".$checkIn."'
+			 	OR (checkInDate < '".$checkOut."' AND checkOutDate >= '".$checkOut."')
+			 	OR (checkInDate >= '".$checkIn."' AND checkOutDate <= '".$checkOut."')
+			  ) 
+			  ORDER BY room.roomType;";
+
+
 
 
 $res = $db->query($query_str);
 
 
 //debugging
-echo "<br />$query_str";
+//echo "<br />$query_str";
 
 //prinitng out the number of results
-echo "<b>".$res->num_rows."</b> types of rooms are available";
+echo "<br /><b>".$res->num_rows."</b> types of rooms are available";
 echo "</div>";
 
 echo "<div class=\"roomtype\">";

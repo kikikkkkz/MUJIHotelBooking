@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 01, 2018 at 07:50 AM
+-- Generation Time: Apr 02, 2018 at 10:11 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -25,28 +25,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `availability`
---
-
-CREATE TABLE `availability` (
-  `roomNumber` int(11) NOT NULL,
-  `status` varchar(20) NOT NULL,
-  `fromDate` date NOT NULL,
-  `toDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `availability`
---
-
-INSERT INTO `availability` (`roomNumber`, `status`, `fromDate`, `toDate`) VALUES
-(1001, 'unavailable', '2018-03-09', '2018-03-10'),
-(2003, 'unavailable', '2018-04-09', '2018-04-14'),
-(2004, 'unavailable', '2018-04-22', '2018-04-23');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `comment`
 --
 
@@ -62,7 +40,8 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`content`, `memberNumber`, `roomType`, `timePosted`) VALUES
-('Nice stay in MUJI!', 1, 'A', '2018-03-26');
+('Nice stay in MUJI!', 1, 'A', '2018-03-26'),
+('The best experience in Shenzhen.', 4, 'A', '2018-04-01');
 
 -- --------------------------------------------------------
 
@@ -106,6 +85,8 @@ CREATE TABLE `reservation` (
   `numberOfRoomBooked` int(11) NOT NULL,
   `priceEach` int(11) NOT NULL,
   `roomType` varchar(10) NOT NULL,
+  `roomNumber` int(11) NOT NULL,
+  `bedType` text NOT NULL,
   `bookingComments` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -113,10 +94,11 @@ CREATE TABLE `reservation` (
 -- Dumping data for table `reservation`
 --
 
-INSERT INTO `reservation` (`bookingNumber`, `bookingDate`, `checkInDate`, `checkOutDate`, `memberNumber`, `numberOfGuests`, `numberOfRoomBooked`, `priceEach`, `roomType`, `bookingComments`) VALUES
-(1, '2018-03-01', '2018-03-09', '2018-03-10', 1, 2, 1, 950, 'A', 'Sea view'),
-(2, '2018-03-26', '2018-04-09', '2018-04-14', 2, 1, 1, 1300, 'C', ''),
-(3, '2018-03-31', '2018-04-22', '2018-04-23', 4, 2, 1, 1300, 'C', 'Hill view');
+INSERT INTO `reservation` (`bookingNumber`, `bookingDate`, `checkInDate`, `checkOutDate`, `memberNumber`, `numberOfGuests`, `numberOfRoomBooked`, `priceEach`, `roomType`, `roomNumber`, `bedType`, `bookingComments`) VALUES
+(1, '2018-03-01', '2018-03-09', '2018-03-10', 1, 2, 1, 950, 'A', 1001, 'Double', 'Sea view'),
+(2, '2018-03-26', '2018-04-09', '2018-04-14', 2, 1, 1, 1300, 'C', 2003, 'Double', ''),
+(3, '2018-03-31', '2018-04-22', '2018-04-23', 4, 2, 1, 1300, 'C', 2003, 'Double', 'Hill view'),
+(4, '2018-04-02', '2018-04-09', '2018-04-14', 4, 2, 1, 1300, 'C', 2004, 'Twin', 'First floor');
 
 -- --------------------------------------------------------
 
@@ -178,12 +160,6 @@ INSERT INTO `roomtype` (`roomType`, `roomTypeDescription`, `bedType`, `area`, `n
 --
 
 --
--- Indexes for table `availability`
---
-ALTER TABLE `availability`
-  ADD PRIMARY KEY (`roomNumber`);
-
---
 -- Indexes for table `members`
 --
 ALTER TABLE `members`
@@ -221,7 +197,7 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `bookingNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `bookingNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
