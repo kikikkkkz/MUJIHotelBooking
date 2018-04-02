@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 01, 2018 at 07:50 AM
+-- Generation Time: Apr 02, 2018 at 09:24 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `availability` (
   `roomNumber` int(11) NOT NULL,
-  `status` varchar(20) NOT NULL,
   `fromDate` date NOT NULL,
   `toDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -39,10 +38,11 @@ CREATE TABLE `availability` (
 -- Dumping data for table `availability`
 --
 
-INSERT INTO `availability` (`roomNumber`, `status`, `fromDate`, `toDate`) VALUES
-(1001, 'unavailable', '2018-03-09', '2018-03-10'),
-(2003, 'unavailable', '2018-04-09', '2018-04-14'),
-(2004, 'unavailable', '2018-04-22', '2018-04-23');
+INSERT INTO `availability` (`roomNumber`, `fromDate`, `toDate`) VALUES
+(1001, '2018-03-09', '2018-03-10'),
+(2003, '2018-04-09', '2018-04-14'),
+(2003, '2018-04-22', '2018-04-23'),
+(2004, '2018-04-09', '2018-04-14');
 
 -- --------------------------------------------------------
 
@@ -62,7 +62,8 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`content`, `memberNumber`, `roomType`, `timePosted`) VALUES
-('Nice stay in MUJI!', 1, 'A', '2018-03-26');
+('Nice stay in MUJI!', 1, 'A', '2018-03-26'),
+('The best experience in Shenzhen.', 4, 'A', '2018-04-01');
 
 -- --------------------------------------------------------
 
@@ -176,12 +177,6 @@ INSERT INTO `roomtype` (`roomType`, `roomTypeDescription`, `bedType`, `area`, `n
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `availability`
---
-ALTER TABLE `availability`
-  ADD PRIMARY KEY (`roomNumber`);
 
 --
 -- Indexes for table `members`
