@@ -10,6 +10,7 @@ $stmt->bind_param('i',$id);
 $stmt->execute();
 $stmt->bind_result($last1,$first1,$email1,$phone1,$country1);;
 
+$page_title = 'Profile';
 include('header.php');
 
 //display results

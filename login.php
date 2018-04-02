@@ -1,4 +1,5 @@
 <?php
+$page_title = 'Log in';
 include('header.php');
 require_once("initialize.php");
 // require_SSL();

@@ -1,12 +1,14 @@
 <?php
 require_once('initialize.php');
+
+$page_title = 'Room Choice';
 include('header.php');
 
 echo "<h2>Rooms</h2>";
 //session the url address
 $_SESSION['callback_url']=url_for('room.php');
 
-//set sql query string and gett the results from database
+//set sql query string and get the results from database
 $query_str = "SELECT roomType FROM roomtype";
 $res = $db->query($query_str);
 

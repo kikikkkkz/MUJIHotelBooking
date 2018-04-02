@@ -38,7 +38,7 @@ if(is_post_request()) {
 
 ?>
 
-<?php $page_title = 'Create Account'; ?>
+<?php $page_title = 'Register'; ?>
 <?php include('header.php'); ?>
 
 <div id="content">

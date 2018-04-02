@@ -1,15 +1,18 @@
 <?php
 	require_once('initialize.php');
+	if(!isset($page_title)) { $page_title = 'Welcome'; }
 ?>
 
 <html>
 <head>
-<title>MUJI hotel</title>
+<title>MUJI Hotel | <?php echo h($page_title); ?></title>
+
 <style>
 * {font-family:Georgia;}
 a.nav { color:white; text-decoration: none;}
 a { color:34495e; text-decoration: none; font-family:verdana;}
 </style>
+
 </head>
 <body>
 <table style="width:100%;border-spacing:0px">
@@ -19,7 +22,7 @@ a { color:34495e; text-decoration: none; font-family:verdana;}
 <tr height="30" bgcolor="#bdc3c7">
 <td style="font-family:verdana;font-size:18px;color:white;">
 <strong><a class="nav"  href="<?php echo url_for('search.php'); ?>">Home</a> | 
-<strong><a class="nav"  href="<?php echo url_for('room.php'); ?>">View rooms</a> | 
+<strong><a class="nav"  href="<?php echo url_for('room.php'); ?>">Rooms</a> | 
 
 <?php 
 //if logged in, show username and logout, otherwise show login

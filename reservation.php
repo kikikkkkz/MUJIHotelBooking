@@ -2,6 +2,7 @@
 require_once('initialize.php');
 $_SESSION['callback_url']=url_for('reservation.php');
 
+$page_title = 'Reservation';
 include('header.php');
 echo "<h2>Your Reservation</h2>";
 if(is_post_request()){ $_SESSION['submit']='true';}

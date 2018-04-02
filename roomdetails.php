@@ -8,8 +8,9 @@ $query_str = "SELECT roomType, roomTypeDescription, bedType, area, numberOfOccup
 $stmt = $db->prepare($query_str);
 $stmt->bind_param('s',$room);
 $stmt->execute();
-$stmt->bind_result($room1,$descroption1,$bedtype1,$area1,$occupant1,$price1,$image1);;
+$stmt->bind_result($room1,$descroption1,$bedtype1,$area1,$occupant1,$price1,$image1);
 
+$page_title = 'Room Details';
 include('header.php');
 
 echo "<a href=";
@@ -32,6 +33,7 @@ if($stmt->fetch()) {
 	echo "</p>";
 }
 
+//booking information
 echo "<form action=\"reservation.php\" method=\"POST\">";
 echo "No. of Room(s) | 1<br>";
 echo "Number of Guest(s) <select name=\"occupants\"><option value=\"1\">1</option><option value=\"2\">2</option></select>";
