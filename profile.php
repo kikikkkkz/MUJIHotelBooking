@@ -40,10 +40,29 @@ if($stmt->fetch()) {
 	echo "Type $room1 RMB $price1 /night";
 }
 echo "</p>";
+$stmt->free_result();
+
+echo "<br>";
+
+//print out comments posted by the member
+$query_str = "SELECT content, timePosted, roomType FROM comment WHERE memberNumber = ".$id."";
+			  
+$res = $db->query($query_str);
+
+echo "<p>";
+echo "Your Comments:<br>";
+if($res->num_rows > 0) {
+	while ($row = $res->fetch_assoc()) {
+		echo $row['timePosted']." | Type ".$row['roomType']." - ".$row['content']."<br>";
+	}
+}else{
+	echo "Haven't posted any comments yet."; //show 0 result it there is nothing matched 
+}
+echo "</p>";
+$res->free_result();
 
 include('footer.php');
 
-$stmt->free_result();
 $db->close();
 ?>
 

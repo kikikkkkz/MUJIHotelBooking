@@ -45,7 +45,7 @@ $res = $db->query($query_str);
 
 
 //debugging
-//echo "<br />$query_str";
+echo "<br />$query_str";
 
 //prinitng out the number of results
 echo "<b>".$res->num_rows."</b> types of rooms are available";
@@ -93,6 +93,8 @@ echo "</div>";
 
 echo "</div>";
 
+$res->free_result();
+$db->close();
 
 ?>
 
