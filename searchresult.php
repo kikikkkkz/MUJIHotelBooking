@@ -9,6 +9,7 @@ if(isset($_SESSION['check_out'])) $checkOut = $_SESSION['check_out'];
 
 // echo $_SESSION['check_in'];
 
+echo "<div class=\"result\">";
 echo "<br /><h1>Choose a room
 	</h1>";
 
@@ -33,8 +34,10 @@ $query_str = "SELECT DISTINCT room.roomType, roomtype.roomTypeDescription,
 			  LEFT JOIN availability ON room.roomNumber = availability.roomNumber
 			  LEFT JOIN roomtype ON room.roomType = roomtype.roomType
 			  WHERE availability.roomNumber IS NULL
-			  OR availability.fromDate NOT BETWEEN '".$checkIn."' AND '".$checkOut."' 
-			  AND availability.toDate NOT BETWEEN '".$checkIn."' AND '".$checkOut."'";
+			  OR availability.fromDate <= '".$checkIn."' 
+			  AND availability.fromDate >= '".$checkOut."' 
+			  AND availability.toDate >='".$checkIn."' 
+			  AND availability.toDate >= '".$checkOut."'";
 
 
 $res = $db->query($query_str);
@@ -79,8 +82,7 @@ if($res->num_rows > 0) {
 	echo "There are currently no rooms available "; //show 0 result it there is nothing matched 
 }
 
-
-
+echo "</div>";
 
 
 ?>
@@ -90,7 +92,6 @@ if($res->num_rows > 0) {
 
 <html>
 <head>
-	<title>Choose a room</title>
 
 </head>
 
