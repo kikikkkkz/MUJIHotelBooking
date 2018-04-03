@@ -9,9 +9,13 @@ $page_title = 'Confirm';
 include('header.php');
 
 echo "<div class=\"confirm\">";
-// if(is_post_request()){ 
-// 	$_SESSION['submit']='true'; 
-// }
+
+if(is_post_request()&&isset($_POST['book'])){ 
+	$occupants=$_POST['occupants'] ?? '';
+	$_SESSION['occupants']=$occupants;
+	$bed=$_POST['bed'] ?? '';
+	$_SESSION['bed']=$bed;
+}
 require_login();
 
 //get session id
@@ -61,17 +65,12 @@ $_SESSION['priceEach']=$price1;
 $stmt->free_result();
 
 echo "<b>Number of room</b> | 1<br>";
-$occupants=$_POST['occupants'] ?? '';
-$_SESSION['occupants']=$occupants;
-echo "<b>Number of guests</b> | ".$occupants."<br>";
-$bed=$_POST['bed'] ?? '';
-$_SESSION['bed']=$bed;
-echo "<b>Type of bed type</b> | ".$bed."<br>";
+echo "<b>Number of guests</b> | ".$_SESSION['occupants']."<br>";
+echo "<b>Type of bed type</b> | ".$_SESSION['bed']."<br>";
 
 echo "<br>";
 echo "<form action=\"reservation.php\" method=\"POST\">";
-echo "<input type=\"submit\" value=\"Confirm\">";
-// $_SESSION['submit']='true';
+echo "<input type=\"submit\" name=\"confirm\" value=\"Confirm\">";
 echo "</form>";
 
 echo "</div>";

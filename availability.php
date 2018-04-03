@@ -18,7 +18,7 @@ echo ">&laquo; Back to Type $room</a></button> ";
 
 echo "<h1>Availability of TYPE $room</h1>";
 
-if(is_post_request()) {
+if(is_post_request()&&isset($_POST['search'])) {
 	if(isset($_POST['checkIn'])) $checkIn = $_POST['checkIn'];
 	if(isset($_POST['checkOut'])) $checkOut = $_POST['checkOut'];
 
@@ -105,7 +105,7 @@ echo "</div>";
 		<tr>
 			<td><input type="text" name="checkIn" id="checkIn" placeholder="When to arrive" value="<?php if(isset($_POST['checkIn'])) echo $_POST['checkIn'] ?>"> </td>
 			<td><input type="text" name="checkOut" id="checkOut" placeholder="When to leave" value="<?php if(isset($_POST['checkOut'])) echo $_POST['checkOut'] ?>"> </td>
-			<td><input type="submit" id="search" value="Search"></td>
+			<td><input type="submit" name="search" id="search" value="Search"></td>
 		</tr>
 		
 		</table>

@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
-<<<<<<< HEAD
--- Generation Time: Apr 02, 2018 at 10:11 PM
-=======
--- Generation Time: Apr 02, 2018 at 09:24 PM
->>>>>>> master
+-- Generation Time: Apr 03, 2018 at 04:41 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -29,31 +25,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
-<<<<<<< HEAD
-=======
--- Table structure for table `availability`
---
-
-CREATE TABLE `availability` (
-  `roomNumber` int(11) NOT NULL,
-  `fromDate` date NOT NULL,
-  `toDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `availability`
---
-
-INSERT INTO `availability` (`roomNumber`, `fromDate`, `toDate`) VALUES
-(1001, '2018-03-09', '2018-03-10'),
-(2003, '2018-04-09', '2018-04-14'),
-(2003, '2018-04-22', '2018-04-23'),
-(2004, '2018-04-09', '2018-04-14');
-
--- --------------------------------------------------------
-
---
->>>>>>> master
 -- Table structure for table `comment`
 --
 
@@ -96,7 +67,9 @@ INSERT INTO `members` (`memberNumber`, `lastName`, `firstName`, `email`, `phoneN
 (1, 'Ma', 'Jack', 'jma@taobao.com', '7787787778', 'China', '$2y$10$lkeLxdtcxhm3QZSvixDkpeI/6qvy2Z8GVKWoSzLMXqv0M5k3J67J6'),
 (2, 'Hortons', 'Tim', 'timhortons@timhortons.ca', '7789999999', 'Canada', '$2y$10$lkeLxdtcxhm3QZSvixDkpeI/6qvy2Z8GVKWoSzLMXqv0M5k3J67J6'),
 (3, 'Jobs', 'Steve', 'sjobs@apple.com', '7787766666', 'USA', '$2y$10$lkeLxdtcxhm3QZSvixDkpeI/6qvy2Z8GVKWoSzLMXqv0M5k3J67J6'),
-(4, 'Zhang', 'Kiki', 'kikizhangqi@outlook.com', '7787787777', 'China', '$2y$10$uIcM5KkG1iyY5.tSetfB.OAID0WwiT4eYrac5HE2SW72kYZyq27ra');
+(4, 'Zhang', 'Kiki', 'kikizhangqi@outlook.com', '7787787777', 'China', '$2y$10$uIcM5KkG1iyY5.tSetfB.OAID0WwiT4eYrac5HE2SW72kYZyq27ra'),
+(5, 'Zou', 'Jenny', 'yyzou@sfu.ca', '6041234567', 'Canada', '$2y$10$TmrlmZ6CAulfhEmnDsK5fuUBxByrKRY6o/znH9W7mcKyxpvLckly6'),
+(6, 'Zhang', 'Qi', 'kkz@outlook.com', '6138906438', 'Canada', '$2y$10$HyVXPHCWwSJHnbAlUgAq5eI8PJZfILL/olZ7pjzY4bkmcTfPmNOkC');
 
 -- --------------------------------------------------------
 
@@ -127,7 +100,12 @@ INSERT INTO `reservation` (`bookingNumber`, `bookingDate`, `checkInDate`, `check
 (1, '2018-03-01', '2018-03-09', '2018-03-10', 1, 2, 1, 950, 'A', 1001, 'Double', 'Sea view'),
 (2, '2018-03-26', '2018-04-09', '2018-04-14', 2, 1, 1, 1300, 'C', 2003, 'Double', ''),
 (3, '2018-03-31', '2018-04-22', '2018-04-23', 4, 2, 1, 1300, 'C', 2003, 'Double', 'Hill view'),
-(4, '2018-04-02', '2018-04-09', '2018-04-14', 4, 2, 1, 1300, 'C', 2004, 'Twin', 'First floor');
+(4, '2018-04-02', '2018-04-09', '2018-04-14', 4, 2, 1, 1300, 'C', 2004, 'Twin', 'First floor'),
+(18, '2018-04-03', '2018-04-18', '2018-04-19', 4, 2, 1, 950, 'A', 0, 'Twin', ''),
+(21, '2018-04-03', '2018-04-11', '2018-04-26', 5, 1, 1, 2500, 'E', 0, 'Twin', ''),
+(24, '2018-04-03', '2018-04-08', '2018-04-09', 5, 2, 1, 1480, 'D', 0, 'Twin', ''),
+(26, '2018-04-03', '2018-04-09', '2018-04-14', 4, 1, 1, 950, 'A', 0, 'Double', ''),
+(30, '2018-04-03', '2018-04-03', '2018-04-04', 6, 2, 1, 1085, 'B', 0, 'Double', '');
 
 -- --------------------------------------------------------
 
@@ -220,13 +198,13 @@ ALTER TABLE `roomtype`
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `memberNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `memberNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `bookingNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `bookingNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

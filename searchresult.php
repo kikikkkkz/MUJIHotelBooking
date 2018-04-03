@@ -81,10 +81,14 @@ if($res->num_rows > 0) {
 		echo "No. of Room(s) | 1<br>";
 		echo "Number of Guest(s) <select name=\"occupants\"><option value=\"1\">1</option><option value=\"2\">2</option></select>";
 		echo "<br>";
-		echo "<input type=\"radio\" name=\"bed\" value=\"Double\" checked> Double 
-		  <input type=\"radio\" name=\"bed\" value=\"Twin\"> Twin<br>";
+		if($row['roomType']=='E'){
+			echo "<input type=\"radio\" name=\"bed\" value=\"Twin\" checked> Twin<br>";
+		}else{
+			echo "<input type=\"radio\" name=\"bed\" value=\"Double\" checked> Double 
+			<input type=\"radio\" name=\"bed\" value=\"Twin\"> Twin<br>";
+		}
 		echo "<br>";
-		echo "<input type=\"submit\" value=\"Book\">";
+		echo "<input type=\"submit\" name=\"book\" value=\"Book\">";
 		// if($_SESSION['callback_url']!=url_for('search.php')){
 		// 	$_SESSION['room']=$row['roomType']; //room viewed on reservation will not be added again 
 		// }

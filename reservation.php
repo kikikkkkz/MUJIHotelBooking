@@ -6,7 +6,7 @@ $_SESSION['callback_url']=url_for('reservation.php');
 $page_title = 'Reservation';
 include('header.php');
 
-echo "<div=\"reservation\">";
+echo "<div class=\"reservation\">";
 
 if(is_post_request()){
 	$reserve['memberNumber']=$_SESSION['admin_id'];
@@ -24,9 +24,10 @@ if(is_post_request()){
       $new_id = mysqli_insert_id($db); //insert id to database
       // $_SESSION['message'] = 'Reservation is confirmed.';
       $_SESSION['booking_id']=$new_id; //set session booking number
-      // redirect_to(url_for('reservation.php?bookingNumber='.$new_id)); //return to previous page
+      
       echo "<h2>Thank you for your reservation!</h2>";
-      echo "Your booking number is ".$_SESSION['booking_id'];
+      echo "Your booking number is ".$_SESSION['booking_id'].".<br>";
+      echo "Have a nice stay in MUJI!<br>";
       unset($_SESSION['check_in']);
       unset($_SESSION['check_out']);
       unset($_SESSION['occupants']);
@@ -48,32 +49,15 @@ if(is_post_request()){
 	$reserve['roomType']='';
 	$reserve['priceEach']='';
 }
-// echo "<h2>Thank you for your reservation!</h2>";
-// echo "Your booking number is ".$booking_id;
-// if(is_post_request()){ $_SESSION['submit']='true';}
-// require_login();
 
-//get session id
-// $id=$_SESSION['admin_id'];
-
-// 	if(isset($_SESSION['prod'])){
-// 		if(isset($_SESSION['submit'])){
-// 			$item = $_SESSION['prod'];
-// 			$result = insert_watchlist($item);
-// 			echo "Successfully added $item.";
-// 		}
-// 		unset($_SESSION['prod']);
-// 		unset($_SESSION['submit']);
-// 	}
 echo "<br>";
-echo "<form action=\"profile.php\" method=\"GET\"><br />";
+
+echo "<form action=\"profile.php\" method=\"POST\">";
 echo "<input type=\"submit\" value=\"Go to profile\">";
 echo "</form>";
 
 echo "</div>";
 
 include('footer.php');
-// $res->free_result();
-// $db->close();
 
 ?>
