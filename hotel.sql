@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
+<<<<<<< HEAD
 -- Generation Time: Apr 02, 2018 at 10:11 PM
+=======
+-- Generation Time: Apr 02, 2018 at 09:24 PM
+>>>>>>> master
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -25,6 +29,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
+=======
+-- Table structure for table `availability`
+--
+
+CREATE TABLE `availability` (
+  `roomNumber` int(11) NOT NULL,
+  `fromDate` date NOT NULL,
+  `toDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `availability`
+--
+
+INSERT INTO `availability` (`roomNumber`, `fromDate`, `toDate`) VALUES
+(1001, '2018-03-09', '2018-03-10'),
+(2003, '2018-04-09', '2018-04-14'),
+(2003, '2018-04-22', '2018-04-23'),
+(2004, '2018-04-09', '2018-04-14');
+
+-- --------------------------------------------------------
+
+--
+>>>>>>> master
 -- Table structure for table `comment`
 --
 

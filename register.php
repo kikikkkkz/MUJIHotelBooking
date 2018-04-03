@@ -86,10 +86,12 @@ if(is_post_request()) {
       
       <br />
       <tr>
-        <td><br /><input type="submit" value="Create Account" /></td>
+        <td></td>
+        <td><input type="submit" value="Create Account" /></td>
       </tr>
 
     </table>
+    <br />
 
       Already a member? <button type="button"><a class="back-link" href="<?php echo url_for('login.php'); ?>">Login here</a></button>  
 

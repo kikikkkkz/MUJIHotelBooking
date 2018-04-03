@@ -57,6 +57,8 @@ echo "</div>";
 echo "<div class=\"roomtype\">";
 if($res->num_rows > 0) {
 	while ($row = $res->fetch_assoc()) {	
+		$id=$row['roomType'];
+		echo "<form action=\"confirm.php?room=$id\" method=\"POST\">";
 		echo "<h3>TYPE ".$row['roomType']."</h3>\n";
 
 		echo "<div class=\"box\">";
@@ -75,17 +77,17 @@ if($res->num_rows > 0) {
 		echo "</p>";
 
 		//booking information
-		echo "<form action=\"reservation.php\" method=\"POST\">";
+		// echo "<form action=\"reservation.php\" method=\"POST\">";
 		echo "No. of Room(s) | 1<br>";
 		echo "Number of Guest(s) <select name=\"occupants\"><option value=\"1\">1</option><option value=\"2\">2</option></select>";
 		echo "<br>";
-		echo "<input type=\"radio\" name=\"bed\" value=\"double\" checked> Double 
-		  <input type=\"radio\" name=\"bed\" value=\"twin\"> Twin<br>";
+		echo "<input type=\"radio\" name=\"bed\" value=\"Double\" checked> Double 
+		  <input type=\"radio\" name=\"bed\" value=\"Twin\"> Twin<br>";
 		echo "<br>";
 		echo "<input type=\"submit\" value=\"Book\">";
-		if($_SESSION['callback_url']!=url_for('search.php')){
-			$_SESSION['room']=$row['roomType']; //room viewed on reservation will not be added again 
-		}
+		// if($_SESSION['callback_url']!=url_for('search.php')){
+		// 	$_SESSION['room']=$row['roomType']; //room viewed on reservation will not be added again 
+		// }
 		echo "</form>";
 		echo "</div>";
 	} 
