@@ -22,7 +22,7 @@
 	<img src="images/logo.svg" width="180px" alt="MUJI Hotel" /></a>
 	
 
-	<ul class="main-nav">
+	<ul class="main-nav topBotomBordersOut">
 		<li><a href="<?php echo url_for('search.php'); ?>">Home</a></li> 
 		<li><a href="<?php echo url_for('room.php'); ?>">Rooms</a></li>  
 

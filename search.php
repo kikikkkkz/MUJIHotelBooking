@@ -61,16 +61,17 @@ $_SESSION['callback_url']=url_for('search.php');
             dateFormat: "yy-mm-dd",
             numberOfMonth: 1,
             onClose: function (date) {                
-                //var from = $('#from').datepicker('getDate');
+                var from = $('#checkIn').datepicker('getDate');
                 //console.log(from); //for debugging
                 var to = $('#checkOut').datepicker('getDate');
-                to.setDate(to.getDate() -1);
+                //to.setDate(to.getDate() -1);
                 //$('#from').datepicker('setDate', to);
-                $('#checkIn').datepicker('option','maxDate',to);
-/*                 if (to <= from) {
+                //$('#checkIn').datepicker('option','maxDate',to);
+                 if (to <= from) {
                     var minDate = $('#dt2').datepicker('option', 'minDate');
-                    $('#from').datepicker('setDate', minDate);
-                } */
+                    $('#checkIn').datepicker('setDate', minDate);
+                    
+                } 
             }
         });
 
