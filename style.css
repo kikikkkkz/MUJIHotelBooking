@@ -1,5 +1,5 @@
-
-/**{
+/*
+*{
 	border: 1px solid black;
 }*/
 
@@ -60,6 +60,14 @@ a:visited {
 	color: #34495e;
 }
 
+footer {
+	text-align: center;
+	margin: 5em;
+}
+
+footer span {
+  color: #AAA;
+}
 
 
 .logo {
@@ -139,6 +147,30 @@ a:visited {
 .room {
 	padding: 1em;
 	text-align: center;
+}
+
+.box1 {
+    display: inline-block;
+    width: 50%;
+    height: 60%;
+    float: right;
+    padding: 2em;
+    margin: 2em 0;
+}
+
+.box1 a {
+	font-size: 30px;
+	letter-spacing: 2px;
+}
+
+.box1 p {
+	margin-top: 2em;
+}
+
+
+#cover-image{
+	width: 100%;
+	padding: 0.1em;
 }
 
 /*roomdetails css*/
@@ -223,6 +255,8 @@ a:visited {
 #room-image {
 	width: 100%;
 }
+
+
 
 
 

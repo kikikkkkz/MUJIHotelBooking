@@ -146,7 +146,7 @@ define("DB_NAME", "hotel");
 
   //generate link for detail page
   function format_name_as_link($id,$name,$page){
-    echo "<a href=\"$page?room=$id\">Type $name</a>";
+    echo "<b><a href=\"$page?room=$id\">TYPE $name</a></b>";
   }
 
   //validate information input for creating an account

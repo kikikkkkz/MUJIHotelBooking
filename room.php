@@ -9,17 +9,27 @@ echo "<div class=\"room\"><h2>Rooms</h2>";
 $_SESSION['callback_url']=url_for('room.php');
 
 //set sql query string and get the results from database
-$query_str = "SELECT roomType FROM roomtype";
+$query_str = "SELECT roomType, area, bedType, price, image FROM roomtype";
 $res = $db->query($query_str);
 
-//list all items as unorder list
-echo "<ul>";
+//list all items
 while($row = $res->fetch_row()){
-	echo "<li>";
+	echo "<div class=\"box1\">";
+	echo "<div id=\"cover-image\"><a href=";	
+	echo url_for('roomdetails.php?room='.$row[0]);
+	echo "><img src=".$row[4]." width=\"100%\" alt=\"\" /></a></div>";
+	echo "</div>";
+
+	echo "<div class=\"box1\">";
 	format_name_as_link($row[0], $row[0], "roomdetails.php"); //each item links to specific model
-	echo "</li>\n";
+	echo "<p>";
+	echo "Area ".$row['1']." m<sup>2</sup><br>
+	Bed Type | ".$row['2']." <br>
+	Room Rate <b>RMB ".$row['3']."</b> /night<br>";
+	// echo "$image1";
+	echo "</p>";
+	echo "</div>";
 };
-echo "</ul>";
 echo "</div>";
 
 
