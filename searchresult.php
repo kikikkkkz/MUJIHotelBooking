@@ -81,7 +81,10 @@ if($res->num_rows > 0) {
 		echo "No. of Room(s) | 1<br>";
 		echo "Number of Guest(s) <select name=\"occupants\"><option value=\"1\">1</option><option value=\"2\">2</option></select>";
 		echo "<br>";
-		if($row['roomType']=='E'){
+		if($row['roomType']=='A'){
+			echo "<input type=\"radio\" name=\"bed\" value=\"Double\" checked> Double<br>";
+		}
+		else if($row['roomType']=='E'){
 			echo "<input type=\"radio\" name=\"bed\" value=\"Twin\" checked> Twin<br>";
 		}else{
 			echo "<input type=\"radio\" name=\"bed\" value=\"Double\" checked> Double 
