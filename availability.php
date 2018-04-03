@@ -7,7 +7,7 @@ include('header.php');
 echo "<div class=\"availability\">";
 
 $errors = [];
-$checkIn = $checkOut = $room = '';
+$typeCheckIn = $typeCheckOut = $room = '';
 
 if(isset($_SESSION['room'])) $room = $_SESSION['room']; 
 //echo $room;
@@ -18,15 +18,17 @@ echo ">&laquo; Back to Type $room</a></button> ";
 
 echo "<h1>Availability of TYPE $room</h1>";
 
-if(is_post_request()&&isset($_POST['search'])) {
-	if(isset($_POST['checkIn'])) $checkIn = $_POST['checkIn'];
-	if(isset($_POST['checkOut'])) $checkOut = $_POST['checkOut'];
+
+if(is_post_request()) {
+	if(isset($_POST['typeCheckIn'])) $typeCheckIn = $_POST['typeCheckIn'];
+	if(isset($_POST['typeCheckOut'])) $typeCheckOut = $_POST['typeCheckOut'];
+
 
 	// Validations
-  if(is_blank($checkIn)) {
+  if(is_blank($typeCheckIn)) {
     $errors[] = "Check-In date cannot be blank.";
   }
-  if(is_blank($checkOut)) {
+  if(is_blank($typeCheckOut)) {
     $errors[] = "Check-Out date cannot be blank.";
   }
 
@@ -34,15 +36,59 @@ if(is_post_request()&&isset($_POST['search'])) {
 
   	//$search_failure_msg = "Search was unsuccessful.";
 	//save to session
-	$_SESSION['check_in'] = $checkIn;
-	$_SESSION['check_out'] = $checkOut;
-	redirect_to(url_for('searchresult.php?checkIn='.$checkIn.'checkOut='.$checkOut));
+	$_SESSION['check_in'] = $typeCheckIn;
+	$_SESSION['check_out'] = $typeCheckOut;
+     // echo $_SESSION['check_in'];
+     // echo $_SESSION['check_out'];
+	//redirect_to(url_for('searchresult.php?checkIn='.$typeCheckIn.'checkOut='.$typeCheckOut));
 	}
 }
 
 // $_SESSION['callback_url']=url_for('search.php');
 
+//set sql query string and get the results from database
+$query_str = "SELECT DISTINCT room.roomType, room.roomNumber, reservation.checkInDate, reservation.checkOutDate
+              FROM room 
+              LEFT JOIN reservation ON reservation.roomNumber = room.roomNumber
+              WHERE room.roomType = '".$room."' 
+              ORDER BY room.roomNumber;";
+
+
+$res = $db->query($query_str);
+
+//prinitng out the number of results
+echo "<br /><b>".$res->num_rows."</b> booked timeslots for Type $room";
+
+if($res->num_rows > 0) {
+    while ($row = $res->fetch_assoc()) {    
+        echo "<br />Room : ".$row['roomNumber']." of Type ".$row['roomType']." is unavailable from ".$row['checkInDate']." to ".$row['checkOutDate']."<br />";
+    } 
+} else  {
+    echo "There are currently no rooms available "; //show 0 result it there is nothing matched 
+}
+
+
 echo "</div>";
+
+//testing
+$query_str = "SELECT DISTINCT reservation.checkInDate, reservation.checkOutDate
+              FROM room 
+              LEFT JOIN reservation ON reservation.roomNumber = room.roomNumber
+              WHERE room.roomType = '".$room."' 
+              ORDER BY room.roomNumber;";
+
+$res = $db->query($query_str);
+
+//debugging
+//echo "<br />$query_str";
+
+while ($row = $res->fetch_assoc()) {
+    $fromDate = $row['checkInDate'];
+    $toDate = $row['checkOutDate'];
+    echo $fromDate.$toDate;
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -57,34 +103,35 @@ echo "</div>";
 
 	<script>
 		$(document).ready(function () {
-        $("#checkIn").datepicker({
-            dateFormat: "yy-mm-dd",   
-            numberOfMonth: 1,
-            minDate: 0,
-            onSelect: function (date) {
-                var date2 = $('#checkIn').datepicker('getDate');
-                date2.setDate(date2.getDate() + 1);
-                //$('#to').datepicker('setDate', date2);
-                $('#checkOut').datepicker('option', 'minDate', date2);
-            }
-        });
-        $('#checkOut').datepicker({
-            dateFormat: "yy-mm-dd",
-            numberOfMonth: 1,
-            onClose: function (date) {                
-                var from = $('#checkIn').datepicker('getDate');
-                //console.log(from); //for debugging
-                var to = $('#checkOut').datepicker('getDate');
-                //to.setDate(to.getDate() -1);
-                //$('#from').datepicker('setDate', to);
-                //$('#checkIn').datepicker('option','maxDate',to);
-                 if (to <= from) {
-                    var minDate = $('#dt2').datepicker('option', 'minDate');
-                    $('#checkIn').datepicker('setDate', minDate);
-                    
-                } 
-            }
-        });
+            var startDate, endDate, dateRange = [];
+
+            $("#typeCheckIn").datepicker({
+                dateFormat : 'yy-mm-dd',
+                onSelect: function (date) {
+                    startDate = $(this).datepicker("getDate");
+                }
+            });
+            $("#typeCheckOut").datepicker({
+                dateFormat : 'yy-mm-dd',
+                onSelect: function (date) {
+                    endDate = $(this).datepicker("getDate");
+                    for (var d = new Date(startDate);
+                        d <= new Date(endDate);
+                        d.setDate(d.getDate() + 1)) {
+                            dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
+                    }
+                }
+            });
+
+            $("#typeCheckIn, #typeCheckOut").datepicker("setDate", new Date());
+
+            $('#dt').datepicker({
+                beforeShowDay: function (date) {
+                    var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                    console.log(dateString);
+                    return [dateRange.indexOf(dateString) == -1];
+                }
+            });
 
 		})
 	</script>
@@ -92,7 +139,7 @@ echo "</div>";
 </head>
 
 <body>
-    <div class="search">
+    <!-- <div class="search">
 
 	<?php echo display_errors($errors); ?>
 
@@ -103,15 +150,25 @@ echo "</div>";
 		<th>Check-out </th></tr>
 		
 		<tr>
-			<td><input type="text" name="checkIn" id="checkIn" placeholder="When to arrive" value="<?php if(isset($_POST['checkIn'])) echo $_POST['checkIn'] ?>"> </td>
-			<td><input type="text" name="checkOut" id="checkOut" placeholder="When to leave" value="<?php if(isset($_POST['checkOut'])) echo $_POST['checkOut'] ?>"> </td>
-			<td><input type="submit" name="search" id="search" value="Search"></td>
+			<td><input type="text" name="typeCheckIn" id="typeCheckIn" placeholder="When to arrive" value="<?php if(isset($_POST['typeCheckIn'])) echo $_POST['typeCheckIn'] ?>"> </td>
+			<td><input type="text" name="typeCheckOut" id="typeCheckOut" placeholder="When to leave" value="<?php if(isset($_POST['typeCheckOut'])) echo $_POST['typeCheckOut'] ?>"> </td>
+			<td><input type="submit" id="search" value="Search"></td>
 		</tr>
 		
 		</table>
 	</form>
     </div>
-    </div>
+    </div> -->
+
+
+    Start:
+    <input id="typeCheckIn" value="<?php echo $fromDate;?>" />
+    End:
+    <input id="typeCheckOut" value="<?php echo $toDate;?>" />
+    <hr />Result:
+    <input id="dt" />
+
+    
 </body>
 
 </html>
