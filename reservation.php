@@ -6,6 +6,8 @@ $_SESSION['callback_url']=url_for('reservation.php');
 $page_title = 'Reservation';
 include('header.php');
 
+echo "<div=\"reservation\">";
+
 if(is_post_request()){
 	$reserve['memberNumber']=$_SESSION['admin_id'];
 	$reserve['bookingDate']=date("Y-m-d");
@@ -64,9 +66,11 @@ if(is_post_request()){
 // 		unset($_SESSION['submit']);
 // 	}
 echo "<br>";
-echo "<form action=\"profile.php\" method=\"GET\">";
+echo "<form action=\"profile.php\" method=\"GET\"><br />";
 echo "<input type=\"submit\" value=\"Go to profile\">";
 echo "</form>";
+
+echo "</div>";
 
 include('footer.php');
 // $res->free_result();

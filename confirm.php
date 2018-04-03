@@ -7,7 +7,8 @@ $_SESSION['callback_url']=url_for('confirm.php?room='.$room);
 
 $page_title = 'Confirm';
 include('header.php');
-echo "<h2>Confirm your booking</h2>";
+
+echo "<div class=\"confirm\">";
 // if(is_post_request()){ 
 // 	$_SESSION['submit']='true'; 
 // }
@@ -23,7 +24,13 @@ $stmt->execute();
 $stmt->bind_result($last1,$first1,$email1,$phone1);;
 
 if($stmt->fetch()) {
-	echo "Name: $first1 $last1<br>Email: $email1<br>Phone number: $phone1<br>";
+	echo "<h2>$first1,</h2>";
+	echo "<h3>please confirm your booking</h3>\n";
+	echo "<table cellspacing=5><p>";
+	echo "<tr><td>Name</td> <td>|</td> <td>$first1 $last1</td></tr>
+	<tr><td>Email</td> <td>|</td> <td>$email1</td></tr>
+	<tr><td>Phone Number</td> <td>|</td> <td>$phone1</td></tr>";
+	echo "</p></table><br />";
 }
 $stmt->free_result();
 
@@ -43,26 +50,31 @@ $stmt->bind_param('s',$room);
 $stmt->execute();
 $stmt->bind_result($price1);;
 
+
+echo "<h3>Room Information</h3>";
 if($stmt->fetch()) {
-	echo "Room type: $room<br>Price: RMB $price1/night<br>";
+	echo "<b>Room type</b> | Type $room<br>";
+	echo "<b>Price</b> | RMB $price1 /night<br>";
 }
 $_SESSION['priceEach']=$price1;
 
 $stmt->free_result();
 
-echo "Number of room: 1<br>";
+echo "<b>Number of room</b> | 1<br>";
 $occupants=$_POST['occupants'] ?? '';
 $_SESSION['occupants']=$occupants;
-echo "Number of guests: ".$occupants."<br>";
+echo "<b>Number of guests</b> | ".$occupants."<br>";
 $bed=$_POST['bed'] ?? '';
 $_SESSION['bed']=$bed;
-echo "Type of bed type: ".$bed."<br>";
+echo "<b>Type of bed type</b> | ".$bed."<br>";
 
 echo "<br>";
 echo "<form action=\"reservation.php\" method=\"POST\">";
 echo "<input type=\"submit\" value=\"Confirm\">";
 // $_SESSION['submit']='true';
 echo "</form>";
+
+echo "</div>";
 
 include('footer.php');
 // $res->free_result();

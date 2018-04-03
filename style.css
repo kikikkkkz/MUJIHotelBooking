@@ -257,6 +257,31 @@ footer span {
 }
 
 
+/*confrim css*/
+.confirm {
+    padding: 1em;
+    text-align: center;
+}
+
+.confirm table {
+	margin: auto;
+}
+
+
+/*reservation css*/
+.reservation {
+	padding: 1em;
+	text-align: center;
+}
+
+/*availability css*/
+.availability {
+	padding: 1em;
+}
+
+.availability h1 {
+	text-align: center;
+}
 
 
 
