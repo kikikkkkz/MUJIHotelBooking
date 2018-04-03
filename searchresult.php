@@ -29,31 +29,36 @@ echo "<p>All trips, whether for business, sightseeing or long-term stays, are su
 
 //set sql query string and get the results from database
 $query_str = "SELECT DISTINCT room.roomType, roomtype.roomTypeDescription, 
-			  roomtype.bedType, roomtype.area, roomtype.numberOfOccupants, 
-			  roomtype.price, roomtype.image 
+			  roomtype.bedType, roomtype.area, roomtype.numberOfOccupants, roomtype.price, roomtype.image 
 			  FROM room
-			  LEFT JOIN availability ON room.roomNumber = availability.roomNumber
 			  LEFT JOIN roomtype ON room.roomType = roomtype.roomType
-			  WHERE availability.roomNumber IS NULL
-			  OR availability.fromDate <= '".$checkIn."' 
-			  AND availability.fromDate >= '".$checkOut."' 
-			  AND availability.toDate >='".$checkIn."' 
-			  AND availability.toDate >= '".$checkOut."'";
+			  WHERE room.roomNumber NOT IN
+			  (	SELECT roomNumber 
+				FROM reservation
+				WHERE checkInDate <= '".$checkIn."' AND checkOutDate > '".$checkIn."'
+			 	OR (checkInDate < '".$checkOut."' AND checkOutDate >= '".$checkOut."')
+			 	OR (checkInDate >= '".$checkIn."' AND checkOutDate <= '".$checkOut."')
+			  ) 
+			  ORDER BY room.roomType;";
+
+
 
 
 $res = $db->query($query_str);
 
 
 //debugging
-echo "<br />$query_str";
+//echo "<br />$query_str";
 
 //prinitng out the number of results
-echo "<b>".$res->num_rows."</b> types of rooms are available";
+echo "<br /><b>".$res->num_rows."</b> types of rooms are available";
 echo "</div>";
 
 echo "<div class=\"roomtype\">";
 if($res->num_rows > 0) {
 	while ($row = $res->fetch_assoc()) {	
+		$id=$row['roomType'];
+		echo "<form action=\"confirm.php?room=$id\" method=\"POST\">";
 		echo "<h3>TYPE ".$row['roomType']."</h3>\n";
 
 		echo "<div class=\"box\">";
@@ -72,17 +77,17 @@ if($res->num_rows > 0) {
 		echo "</p>";
 
 		//booking information
-		echo "<form action=\"reservation.php\" method=\"POST\">";
+		// echo "<form action=\"reservation.php\" method=\"POST\">";
 		echo "No. of Room(s) | 1<br>";
 		echo "Number of Guest(s) <select name=\"occupants\"><option value=\"1\">1</option><option value=\"2\">2</option></select>";
 		echo "<br>";
-		echo "<input type=\"radio\" name=\"bed\" value=\"double\" checked> Double 
-		  <input type=\"radio\" name=\"bed\" value=\"twin\"> Twin<br>";
+		echo "<input type=\"radio\" name=\"bed\" value=\"Double\" checked> Double 
+		  <input type=\"radio\" name=\"bed\" value=\"Twin\"> Twin<br>";
 		echo "<br>";
 		echo "<input type=\"submit\" value=\"Book\">";
-		if($_SESSION['callback_url']!=url_for('search.php')){
-			$_SESSION['room']=$row['roomType']; //room viewed on reservation will not be added again 
-		}
+		// if($_SESSION['callback_url']!=url_for('search.php')){
+		// 	$_SESSION['room']=$row['roomType']; //room viewed on reservation will not be added again 
+		// }
 		echo "</form>";
 		echo "</div>";
 	} 

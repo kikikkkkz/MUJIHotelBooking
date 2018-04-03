@@ -312,4 +312,41 @@ define("DB_NAME", "hotel");
       exit();
     }
   }
+
+  //insert new reservation to database
+  function insert_reserve($reserve) {
+    global $db;
+
+    // $errors = validate_admin($reserve);
+    // if (!empty($errors)) {
+    //   return $errors;
+    // }
+
+    // $hashed_password = password_hash($admin['password'], PASSWORD_BCRYPT);
+
+    $sql = "INSERT INTO reservation ";
+    $sql .= "(memberNumber, bookingDate, checkInDate, checkOutDate, numberOfGuests, numberOfRoomBooked, bedType, roomType, priceEach) ";
+    $sql .= "VALUES (";
+    $sql .= "'" . db_escape($db, $reserve['memberNumber']) . "',";
+    $sql .= "'" . db_escape($db, $reserve['bookingDate']) . "',";
+    $sql .= "'" . db_escape($db, $reserve['checkInDate']) . "',";
+    $sql .= "'" . db_escape($db, $reserve['checkOutDate']) . "',";
+    $sql .= "'" . db_escape($db, $reserve['numberOfGuests']) . "',";
+    $sql .= "'" . db_escape($db, $reserve['numberOfRoomBooked']) . "',";
+    $sql .= "'" . db_escape($db, $reserve['bedType']) . "',";
+    $sql .= "'" . db_escape($db, $reserve['roomType']) . "',";
+    $sql .= "'" . db_escape($db, $reserve['priceEach']) . "'";
+    $sql .= ")";
+    $result = mysqli_query($db, $sql);
+
+    // For INSERT statements, $result is true/false
+    if($result) {
+      return true;
+    } else {
+      // INSERT failed
+      echo mysqli_error($db);
+      db_disconnect($db);
+      exit;
+    }
+  }
 ?>
