@@ -36,21 +36,40 @@ if($stmt->fetch()) {
 $stmt->free_result();
 
 //print out comments for the room type
-$query_str = "SELECT content, timePosted FROM comment WHERE roomType = '".$room."'";
+$query_str = "SELECT members.firstName, comment.content, comment.timePosted
+			  FROM comment 
+			  JOIN members ON members.memberNumber = comment.memberNumber
+			  WHERE comment.roomType = '".$room."'";
 			  
+//echo $query_str;
+
 $res = $db->query($query_str);
 
+
 echo "<p>";
-echo "<strong>Comments</strong><br>";
+
+echo "<strong>".$res->num_rows." Comments</strong>";
+
+//only members can see the option of writing comments
+if(isset($_SESSION['admin_id'])) {
+	echo "\t<button tyep=\"button\">Write Comments</button>";
+} 
+echo "<br>";
+
 if($res->num_rows > 0) {
 	while ($row = $res->fetch_assoc()) {
-		echo $row['content']." | ".$row['timePosted']."<br>";
+		echo $row['firstName']."<br />";
+		echo $row['content']." | ".$row['timePosted']."<br />";
 	}
 }else{
-	echo "No comments."; //show 0 result it there is nothing matched 
+	echo "No one has visited yet."; //show 0 result it there is nothing matched 
 }
+
 echo "</p>";
 $res->free_result();
+
+
+
 
 //check availability
 echo "<form action=\"availability.php\" method=\"POST\">";
@@ -59,7 +78,11 @@ if($_SESSION['callback_url']!=url_for('reservation.php')){
 	$_SESSION['room']=$room; //room viewed on reservation will not be added again 
 }
 echo "</form>";
+
+
 echo "</div>";
+
+
 
 include('footer.php');
 

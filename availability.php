@@ -85,7 +85,8 @@ $res = $db->query($query_str);
 while ($row = $res->fetch_assoc()) {
     $fromDate = $row['checkInDate'];
     $toDate = $row['checkOutDate'];
-    echo $fromDate.$toDate;
+    echo "<p id=\"\">".$fromDate;
+    echo "<p id=\"\">".$toDate;
 }
 
 
@@ -111,6 +112,7 @@ while ($row = $res->fetch_assoc()) {
                     startDate = $(this).datepicker("getDate");
                 }
             });
+
             $("#typeCheckOut").datepicker({
                 dateFormat : 'yy-mm-dd',
                 onSelect: function (date) {
@@ -135,6 +137,31 @@ while ($row = $res->fetch_assoc()) {
 
 		})
 	</script>
+
+<!-- <script>
+		$(document).ready(function () {
+            var startDate= $('#typeCheckIn').val();
+            var endDate= $('#typeCheckOut').val();
+            var dateRange = [];
+
+            
+            for (var d = new Date(startDate);
+                        d <= new Date(endDate);
+                        d.setDate(d.getDate() + 1)) {
+                            dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
+             }
+
+            $('#dt').datepicker({
+                beforeShowDay: function (date) {
+                    var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                    console.log(dateString);
+                    return [dateRange.indexOf(dateString) == -1];
+                }
+            });
+
+		})
+	</script> -->
+
 
 </head>
 
@@ -165,7 +192,7 @@ while ($row = $res->fetch_assoc()) {
     <input id="typeCheckIn" value="<?php echo $fromDate;?>" />
     End:
     <input id="typeCheckOut" value="<?php echo $toDate;?>" />
-    <hr />Result:
+    Result:
     <input id="dt" />
 
     
