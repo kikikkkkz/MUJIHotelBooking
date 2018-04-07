@@ -9,6 +9,14 @@ include('header.php');
 echo "<div class=\"reservation\">";
 
 if(is_post_request()){
+	$to = "568654033@qq.com";
+	$subject = "My subject";
+	$txt = "Hello world!";
+	$headers = "From: no-reply@example.com" . "\r\n" .
+	"CC: 568654033@qq.com";
+
+	mail($to,$subject,$txt,$headers);
+
 	$reserve['memberNumber']=$_SESSION['admin_id'];
 	$reserve['bookingDate']=date("Y-m-d");
 	$reserve['checkInDate']=$_SESSION['check_in'];

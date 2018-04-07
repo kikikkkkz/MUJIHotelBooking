@@ -6,6 +6,8 @@ include('header.php');
 
 $errors = [];
 $checkIn = $checkOut = '';
+unset($_SESSION['check_in']);
+unset($_SESSION['check_out']);
 
 
 if(is_post_request()) {

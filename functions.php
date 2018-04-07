@@ -349,4 +349,38 @@ define("DB_NAME", "hotel");
       exit;
     }
   }
+
+  //insert new comment to comment database
+  function insert_comment($comment) {
+    global $db;
+
+    if(is_blank($comment['content'])) {
+      $errors = "Comment cannot be blank.";
+    } elseif (!has_length($comment['content'], array('min' => 10, 'max' => 200))) {
+      $errors = "Comment must be between 10 and 200 characters.";
+    }
+    if (!empty($errors)) {
+      return $errors;
+    }
+
+    $sql = "INSERT INTO comment ";
+    $sql .= "(content, memberNumber, roomType, timePosted) ";
+    $sql .= "VALUES (";
+    $sql .= "'" . db_escape($db, $comment['content']) . "',";
+    $sql .= "'" . db_escape($db, $_SESSION['admin_id']) . "',";
+    $sql .= "'" . db_escape($db, $comment['room']) . "',";
+    $sql .= "'" . db_escape($db, date("Y-m-d")) . "'";
+    $sql .= ")";
+    $result = mysqli_query($db, $sql);
+
+    // For INSERT statements, $result is true/false
+    if($result) {
+      return true;
+    } else {
+      // INSERT failed
+      echo mysqli_error($db);
+      db_disconnect($db);
+      exit;
+    }
+  }
 ?>
