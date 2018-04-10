@@ -1,6 +1,6 @@
 <?php
 require_once("initialize.php");
-require_SSL();
+//require_SSL();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,6 +46,8 @@ if(is_post_request()) {
         // $callback_url=url_for("login.php");
         if(isset($_SESSION['callback_url']))
           $callback_url = $_SESSION['callback_url'];
+          echo "sending an email.";
+          mail("kikizhangqi8@gmail.com", "MUJI Reservation", "Your reservation is confirmed");
           header("Location: http://". $_SERVER['SERVER_NAME'] . ":8080". $callback_url);
         // redirect_to($_SESSION['callback_url']); //return to previous page
       } else {

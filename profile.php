@@ -1,6 +1,7 @@
 <?php
 require_once('initialize.php');
 $id=$_SESSION['admin_id'];
+$_SESSION['callback_url']=url_for('profile.php?id='.$id);
 
 //select all properties from roomtype 
 $query_str = "SELECT lastName,firstName,email,phoneNumber,country FROM members WHERE memberNumber = ?";
@@ -14,6 +15,15 @@ $stmt->bind_result($last1,$first1,$email1,$phone1,$country1);;
 $page_title = 'Profile';
 include('header.php');
 
+?>
+
+<script>
+	
+</script>
+
+
+<?php
+
 echo "<div class=\"login\">";
 
 //display profile 
@@ -26,6 +36,23 @@ if($stmt->fetch()) {
 	echo "</p></table><br />";
 }
 $stmt->free_result();
+
+//updating the info
+echo "\t<button type=\"button\"><a href=\"update.php\">Edit</a></button>";
+
+$query_str = "SELECT phoneNumber FROM members WHERE memberNumber=".$id."";
+$res = $db->query($query_str);
+while ($row = $res->fetch_assoc()) {
+	$number = $row['phoneNumber'];
+}
+
+$res->free_result(); 
+
+?>
+
+
+
+<?php
 
 $query_str = "SELECT bookingNumber, checkInDate, checkOutDate, priceEach, roomType FROM reservation WHERE memberNumber=".$id."";
 			  

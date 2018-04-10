@@ -203,6 +203,38 @@ define("DB_NAME", "hotel");
     return $errors;
   }
 
+  function validate_update($admin, $options=[]) {
+
+    $password_required = $options['password_required'] ?? true;
+
+    if(is_blank($admin['first_name'])) {
+      $errors[] = "First name cannot be blank.";
+    } elseif (!has_length($admin['first_name'], array('min' => 2, 'max' => 50))) {
+      $errors[] = "First name must be between 2 and 50 characters.";
+    }
+
+    if(is_blank($admin['last_name'])) {
+      $errors[] = "Last name cannot be blank.";
+    } elseif (!has_length($admin['last_name'], array('min' => 2, 'max' => 50))) {
+      $errors[] = "Last name must be between 2 and 50 characters.";
+    }
+
+
+    if(is_blank($admin['phone_number'])) {
+      $errors[] = "Phone number cannot be blank.";
+    } elseif (!has_length($admin['phone_number'], array('min' => 10, 'max' => 11))) {
+      $errors[] = "Phone number must be valid.";
+    }
+
+    if(is_blank($admin['country'])) {
+      $errors[] = "Country cannot be blank.";
+    } elseif (!has_length($admin['country'], array('min' => 2, 'max' => 50))) {
+      $errors[] = "Country must be between 2 and 50 characters.";
+    }
+    
+    return $errors;
+  }
+
   //insert new account to database
   function insert_admin($admin) {
     global $db;
@@ -236,6 +268,50 @@ define("DB_NAME", "hotel");
       exit;
     }
   }
+
+  //update new account to database
+   function update_admin($admin) {
+    global $db;
+
+    $errors = validate_update($admin);
+    if (!empty($errors)) {
+      return $errors;
+    }
+
+
+     // $query = "UPDATE members SET 
+     //    firstName = '".$admin['first_name'].
+     //    "', lastName = '".$admin['last_name'].
+     //    "', phoneNumber = '".$admin['phone_number'].
+     //    "', country = '".$admin['country'].
+     //    "' WHERE memberNumber = ".$id."";
+     //   $result = $db->query($query);
+
+    $sql = "UPDATE members SET ";
+    $sql .= "firstName='" . db_escape($db, $admin['first_name']) . "', ";
+    $sql .= "lastName='" . db_escape($db, $admin['last_name']) . "', ";
+    $sql .= "phoneNumber='" . db_escape($db, $admin['phone_number']) . "', ";
+    $sql .= "country='" . db_escape($db, $admin['country']) . "' ";
+    $sql .= "WHERE memberNumber ='" . db_escape($db, $admin['id']) . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    echo $sql;
+
+        // For UPDATE statements, $result is true/false
+    if($result) {
+      return true;
+    } else {
+      // UPDATE failed
+      echo mysqli_error($db);
+      db_disconnect($db);
+      exit;
+    }
+
+  }
+
+
+
+
 
   //valiadation functions
   function is_blank($value) {

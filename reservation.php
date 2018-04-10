@@ -29,6 +29,9 @@ if(is_post_request()){
       echo "<h2>Thank you for your reservation!</h2>";
       echo "Your booking number is ".$_SESSION['booking_id'].".<br>";
       echo "Have a nice stay in MUJI!<br>";
+      echo "<h2>An confirmation email is sent to your email account.</h2><br />";
+      
+
       unset($_SESSION['check_in']);
       unset($_SESSION['check_out']);
       unset($_SESSION['occupants']);
