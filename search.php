@@ -41,10 +41,6 @@ $_SESSION['callback_url']=url_for('search.php');
 
 <html>
 <head>
-	<!-- jquery -->
-	<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
 
 	<script>
 		$(document).ready(function () {
