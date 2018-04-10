@@ -7,10 +7,19 @@
 <head>
 <title>MUJI Hotel | <?php echo h($page_title); ?></title>
 
+
 <!-- adding css -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
 <link rel="stylesheet" type="text/css" href="style.css"/>
+<!-- <link rel="icon" href="/image/muji_icon.ico" type="image/x-icon"> -->
+
+
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+
 
 </head>
 
