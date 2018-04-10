@@ -295,7 +295,7 @@ define("DB_NAME", "hotel");
     $sql .= "WHERE memberNumber ='" . db_escape($db, $admin['id']) . "' ";
     $sql .= "LIMIT 1";
     $result = mysqli_query($db, $sql);
-    echo $sql;
+    //echo $sql;
 
         // For UPDATE statements, $result is true/false
     if($result) {

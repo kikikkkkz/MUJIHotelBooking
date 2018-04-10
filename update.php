@@ -21,11 +21,11 @@ if (isset($_POST['update'])) {
 
 
   $subject = [];
+  $admin['id'] = $id;
   $admin['first_name'] = $_POST['first_name'] ?? '';
   $admin['last_name'] = $_POST['last_name'] ?? '';
   $admin['phone_number'] = $_POST['phone_number'] ?? '';
   $admin['country'] = $_POST['country'] ?? '';
-
 
   $result = update_admin($admin);
   if($result === true) {
