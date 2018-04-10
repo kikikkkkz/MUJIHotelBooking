@@ -1,8 +1,17 @@
 <?php
+require_once("initialize.php");
+require_SSL();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<script>
+  //requireHTTPS();
+</script>
+<?php
 $page_title = 'Log in';
 include('header.php');
-require_once("initialize.php");
-// require_SSL();
+//require_once("initialize.php");
+//require_SSL();
 
 $errors = [];
 $email = '';
@@ -34,7 +43,11 @@ if(is_post_request()) {
       if(password_verify($password, $admin['hashed_password'])) {
         // password matches
         log_in_admin($admin);
-        redirect_to($_SESSION['callback_url']); //return to previous page
+        // $callback_url=url_for("login.php");
+        if(isset($_SESSION['callback_url']))
+          $callback_url = $_SESSION['callback_url'];
+          header("Location: http://". $_SERVER['SERVER_NAME'] . ":8080". $callback_url);
+        // redirect_to($_SESSION['callback_url']); //return to previous page
       } else {
         // username found, but password does not match
         $errors[] = $login_failure_msg;
@@ -72,3 +85,4 @@ if(is_post_request()) {
 <?php
 include('footer.php');
 ?>
+</html>

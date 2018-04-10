@@ -1,4 +1,5 @@
 <?php
+// header("Location: http://". "localhost:8080" . $_SERVER['REQUEST_URI']);
 require_once('initialize.php');
 
 $page_title = 'Room Choice';
