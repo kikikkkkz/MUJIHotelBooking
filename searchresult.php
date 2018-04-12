@@ -7,7 +7,7 @@ include('header.php');
 if(isset($_SESSION['check_in'])) $checkIn = $_SESSION['check_in'];
 if(isset($_SESSION['check_out'])) $checkOut = $_SESSION['check_out'];
 
-// echo $_SESSION['check_in'];
+//echo $_SESSION['check_in'];
 
 echo "<div class=\"result\">";
 echo "<div class=\"section\">";

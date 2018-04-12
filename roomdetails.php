@@ -36,46 +36,20 @@ if($stmt->fetch()) {
 }
 $stmt->free_result();
 
-//print out comments for the room type
+// //print out comments for the room type
 $query_str = "SELECT members.firstName, comment.content, comment.timePosted
 			  FROM comment 
 			  JOIN members ON members.memberNumber = comment.memberNumber
-			  WHERE comment.roomType = '".$room."'";
-			  
-//echo $query_str;
+			  WHERE comment.roomType = '".$room."'
+			  ORDER BY comment.timePosted";
 
 $res = $db->query($query_str);
 
 
 echo "<p>";
 
-echo "<strong>".$res->num_rows." Comments</strong>";
+echo "<strong>".$res->num_rows." Comments</strong><br />";
 
-//only members can see the option of writing comments
-if(isset($_SESSION['admin_id'])) {
-	echo "\t<button tyep=\"button\">Write Comments</button>";
-	echo "<br>";
-	if(is_post_request() && isset($_POST['submit'])){
-		$comment['content']=$_POST['content'] ?? '';
-		$comment['room']=$room;
-		$result = insert_comment($comment);
-		if($result === true) {
-	      echo "<p>Comment successful.</p>";
-	      unset($_POST['submit']);
-	      $comment='';
-	    } else {
-	      $errors = $result; //error message
-	      echo $errors;
-	    }
-	}
-	echo "<form action=\"roomdetails.php?room=$room\" method=\"POST\">";
-	echo "<textarea rows=\"4\" cols=\"50\" name=\"content\"></textarea>
-";
-	echo "<button name=\"submit\">Submit</button>";
-	echo "</form>";
-
-} 
-echo "<br>";
 
 if($res->num_rows > 0) {
 	while ($row = $res->fetch_assoc()) {
@@ -83,14 +57,79 @@ if($res->num_rows > 0) {
 		echo $row['content']."<br />";
 	}
 }else{
-	echo "No one has visited yet."; //show 0 result it there is nothing matched 
+	echo "No one has visited yet.<br />"; //show 0 result it there is nothing matched 
+$res->free_result();
 }
 
+//only members can see the option of writing comments
+if(isset($_SESSION['admin_id'])) {
+	// echo "<br>";
+	// if(is_post_request() && isset($_POST['submit'])){
+	// 	$comment['content']=$_POST['content'] ?? '';
+	// 	$comment['room']=$room;
+	// 	$result = insert_comment($comment);
+	// 	if($result === true) {
+	//       echo "<p>Comment successful.</p>";
+	//       unset($_POST['submit']);
+	//       $comment='';
+	//     } else {
+	//       $errors = $result; //error message
+	//       echo $errors;
+	//     }
+	// }
+	echo "<a href=# class=\"comment_link\">Write Comments</a>";
+	echo "<div class=\"comment_form dno\">";
+	echo "<form method=\"POST\">";
+	echo "<textarea rows=\"4\" cols=\"50\" id=\"comment_name\" name=\"comment_name\"></textarea>";
+	echo "<br /><button name=\"submit\" id=\"submit\">Post Comments</button>";
+	echo "</form></div>";
+	echo "<span id=\"comment_message\"></span>";
+} 
+
+echo "<br>";
+
 echo "</p>";
-$res->free_result();
+?>
+<style>
+.dno {
+	display: none;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$(".comment_link").on("click",function(event) {
+		event.preventDefault();
+		$(this).hide();
+		$(".comment_form").show();
+	});
+
+	$(".comment_form form").on("submit", function(event) {
+		event.preventDefault();
+		//alert($(this).serialize());
+		$.ajax({
+			type: "POST",
+			url: "add_comments.php",
+			data: $(this).serialize(),
+			dataType: "JSON",
+			success: function(data) {
+				if(data.errors != '') {
+					$('.comment_form')[0].reset();
+					$('.comment_message').html(data.errors);
+					$('.comment_message').fadeOut(2000, function() {
+						$(this).html("");
+					});
+				}
+			}
+		})
+	});
+
+});
 
 
 
+</script>
+
+<?php
 
 //check availability
 echo "<form action=\"availability.php\" method=\"POST\">";

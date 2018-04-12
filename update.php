@@ -2,7 +2,7 @@
 require_once('initialize.php');
 $id=$_SESSION['admin_id'];
 
-$page_title = 'Profile';
+$page_title = 'Edit profile';
 include('header.php');
 
 $errors = [];

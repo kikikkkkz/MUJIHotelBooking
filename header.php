@@ -12,7 +12,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
 <link rel="stylesheet" type="text/css" href="style.css"/>
-<!-- <link rel="icon" href="/image/muji_icon.ico" type="image/x-icon"> -->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+
+<!-- adding icon -->
+<link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
 
 
 <!-- jquery -->
