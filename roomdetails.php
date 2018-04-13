@@ -1,7 +1,9 @@
 <?php
 require_once('initialize.php');
 $room = trim($_GET['room']);
+$_SESSION['room']=$room;
 $content = '';
+$result = '';
 
 $page_title = 'Room Details';
 include('header.php');
@@ -36,33 +38,29 @@ if($stmt->fetch()) {
 }
 $stmt->free_result();
 
-// //print out comments for the room type
-$query_str = "SELECT members.firstName, comment.content, comment.timePosted
-			  FROM comment 
-			  JOIN members ON members.memberNumber = comment.memberNumber
-			  WHERE comment.roomType = '".$room."'
-			  ORDER BY comment.timePosted";
-
-$res = $db->query($query_str);
-
-
-echo "<p>";
-
-echo "<strong>".$res->num_rows." Comments</strong><br />";
-
-
-if($res->num_rows > 0) {
-	while ($row = $res->fetch_assoc()) {
-		echo $row['firstName']." | ".$row['timePosted']."<br />";
-		echo $row['content']."<br />";
-	}
-}else{
-	echo "No one has visited yet.<br />"; //show 0 result it there is nothing matched 
-$res->free_result();
-}
+//display comments for the room type
+echo "<div id=\"display_comment\"></div>";
 
 //only members can see the option of writing comments
 if(isset($_SESSION['admin_id'])) {
+?>
+<html>
+<body>
+<a href=# class="comment_link"><b>Write Comments</b></a>
+<form method="POST" id="comment_form" class="dno">
+    <div class="form-group">
+     <input type="hidden" name="comment_type" id="comment_type" value="<?php echo $room;?>" />
+     <textarea rows="4" cols="50" id="comment_name" name="comment_name"></textarea>
+    </div>
+    <div class="form-group">
+     <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
+    </div>
+   </form>
+   <span id="comment_message"></span>
+   <br />
+</body>
+</html>
+<?php
 	// echo "<br>";
 	// if(is_post_request() && isset($_POST['submit'])){
 	// 	$comment['content']=$_POST['content'] ?? '';
@@ -77,19 +75,18 @@ if(isset($_SESSION['admin_id'])) {
 	//       echo $errors;
 	//     }
 	// }
-	echo "<a href=# class=\"comment_link\">Write Comments</a>";
-	echo "<div class=\"comment_form dno\">";
-	echo "<form method=\"POST\">";
-	echo "<textarea rows=\"4\" cols=\"50\" id=\"comment_name\" name=\"comment_name\"></textarea>";
-	echo "<br /><button name=\"submit\" id=\"submit\">Post Comments</button>";
-	echo "</form></div>";
-	echo "<span id=\"comment_message\"></span>";
+	// echo "<a href=# class=\"comment_link\">Write Comments</a>";
+	// echo "<div class=\"comment_form dno\">";
+	// echo "<form method=\"POST\">";
+	// echo "<textarea rows=\"4\" cols=\"50\" id=\"comment_name\" name=\"comment_name\"></textarea>";
+	// echo "<br /><button name=\"submit\" id=\"submit\">Post Comments</button>";
+	// echo "</form></div>";
+	// echo "<span id=\"comment_message\"></span>";
 } 
 
-echo "<br>";
 
-echo "</p>";
 ?>
+
 <style>
 .dno {
 	display: none;
@@ -100,44 +97,60 @@ $(document).ready(function(){
 	$(".comment_link").on("click",function(event) {
 		event.preventDefault();
 		$(this).hide();
-		$(".comment_form").show();
+		$("#comment_form").show();
 	});
 
-	$(".comment_form form").on("submit", function(event) {
+	$("#comment_form").on("submit", function(event) {
 		event.preventDefault();
-		//alert($(this).serialize());
+		var form_data = $(this).serialize();
+		// alert(form_data);
 		$.ajax({
-			type: "POST",
-			url: "add_comments.php",
-			data: $(this).serialize(),
+			url: "add_comment.php",
+			method: "POST",
+			data: form_data,
 			dataType: "JSON",
 			success: function(data) {
 				if(data.errors != '') {
-					$('.comment_form')[0].reset();
-					$('.comment_message').html(data.errors);
-					$('.comment_message').fadeOut(2000, function() {
-						$(this).html("");
-					});
+					$('#comment_form')[0].reset();
+					$('#comment_message').fadeIn().html(data.errors);
+					setTimeout(function(){
+						$('#comment_message').fadeOut("slow");
+					},2000);
+					load_comment();
 				}
 			}
 		})
+		// $(this).hide();
+		// $(".comment_link").show();
 	});
 
+	load_comment();
+
+	function load_comment()
+	{
+	  $.ajax({
+	   url:"fetch_comment.php",
+	   method:"POST",
+	   success:function(data)
+	   {
+	    $('#display_comment').html(data);
+	   }
+	  })
+	}
+
 });
-
-
 
 </script>
 
 <?php
 
 //check availability
-echo "<form action=\"availability.php\" method=\"POST\">";
-echo "<input type=\"submit\" value=\"Check Availability\">";
-if($_SESSION['callback_url']!=url_for('reservation.php')){
-	$_SESSION['room']=$room; //room viewed on reservation will not be added again 
-}
-echo "</form>";
+// echo "<form action=\"availability.php\" method=\"POST\">";
+// echo "<input type=\"submit\" value=\"Check Availability\">";
+// if($_SESSION['callback_url']!=url_for('reservation.php')){
+// 	$_SESSION['room']=$room; //room viewed on reservation will not be added again 
+// }
+// echo "</form>";
 
 
 echo "</div>";

@@ -36,8 +36,6 @@ if (isset($_POST['update'])) {
   
 }
 
-
-
 ?>
 
 <div class="register">
@@ -47,6 +45,8 @@ if (isset($_POST['update'])) {
     <h1>Edit Profile</h1>
 
     <?php echo display_errors($errors); ?>
+
+    <button type="button"><a href="<?php echo url_for('profile.php'); ?>">&laquo;Back to profile</a></button>
 
     <form method="post">
       <table cellspacing="10">
@@ -83,9 +83,6 @@ if (isset($_POST['update'])) {
       </tr>
 		   
 </table>
-
-	<button type="button"><a href="<?php echo url_for('profile.php'); ?>">&laquo;Back to profile</a></button>  
-
 
 
 </form>

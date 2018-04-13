@@ -1,17 +1,9 @@
 <?php
 require_once("initialize.php");
-//require_SSL();
-?>
-<!DOCTYPE html>
-<html lang="en">
-<script>
-  //requireHTTPS();
-</script>
-<?php
+require_SSL();
+
 $page_title = 'Log in';
 include('header.php');
-//require_once("initialize.php");
-//require_SSL();
 
 $errors = [];
 $email = '';
