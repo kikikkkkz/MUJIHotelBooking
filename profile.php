@@ -66,7 +66,7 @@ if($res->num_rows > 0) {
 		// echo "Booking Number ".$row['bookingNumber']." | ".$row['checkInDate']." ~ ".$row['checkOutDate']."<br>";
 		// echo "Type ".$row['roomType']." RMB ".$row['priceEach']."/night<br>";
 		echo "<table cellspacing=5>";
-		echo "<tr><td>Booking Number <b>".$row['bookingNumber']."</b></td> <td>|</td> <td>".$row['checkInDate']."~ ".$row['checkOutDate']."</td></tr>";
+		echo "<tr><td>Booking Number <b>".$row['bookingNumber']."</b></td> <td>|</td> <td>".$row['checkInDate']." ~ ".$row['checkOutDate']."</td></tr>";
 		echo "<tr><td></td> <td>|</td> <td><b><a href=";
 		echo url_for('roomdetails.php?room='.$row['roomType']);
 		echo ">Type ".$row['roomType']."</b></a></td></tr>";
@@ -91,7 +91,7 @@ $res = $db->query($query_str);
 
 echo "<p>";
 
-echo "<b>Your Comments</b><br>";
+echo "<b>Your Comment</b><br>";
 echo "<table cellspacing=5>";
 
 if($res->num_rows > 0) {

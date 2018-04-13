@@ -19,7 +19,11 @@ if(is_post_request()) {
     $_SESSION['message'] = 'Account created.';
     $_SESSION['admin_id']=$new_id; //login new account
     $_SESSION['email'] = $admin['email']; //set session email
-    redirect_to($_SESSION['callback_url']); //return to previous page
+    // redirect_to($_SESSION['callback_url']); //return to previous page
+    if(isset($_SESSION['callback_url'])){
+        $callback_url = $_SESSION['callback_url'];
+        header("Location: http://". $_SERVER['SERVER_NAME'] . ":8080". $callback_url);
+    }
   } else {
     $errors = $result; //error message
   }

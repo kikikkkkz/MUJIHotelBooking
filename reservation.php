@@ -5,6 +5,7 @@ $_SESSION['callback_url']=url_for('reservation.php');
 
 $page_title = 'Reservation';
 include('header.php');
+date_default_timezone_set('America/Los_Angeles');
 
 echo "<div class=\"reservation\">";
 
@@ -34,7 +35,10 @@ if(is_post_request()){
       echo "<h2>Thank you for your reservation!</h2>";
       echo "Your booking number is <b>".$_SESSION['booking_id'].".</b><br>";
       echo "Have a nice stay in MUJI!<br>";
+<<<<<<< HEAD
       //echo $_POST['bookingComment'];
+=======
+>>>>>>> master
       // echo "<h2>An confirmation email is sent to your email account.</h2><br />";
       
 
