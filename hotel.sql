@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 03, 2018 at 04:41 AM
+-- Generation Time: Apr 13, 2018 at 10:49 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -41,7 +41,13 @@ CREATE TABLE `comment` (
 
 INSERT INTO `comment` (`content`, `memberNumber`, `roomType`, `timePosted`) VALUES
 ('Nice stay in MUJI!', 1, 'A', '2018-03-26'),
-('The best experience in Shenzhen.', 4, 'A', '2018-04-01');
+('The best experience in Shenzhen.', 4, 'A', '2018-04-01'),
+('The bed is so comfortable!', 4, 'E', '2018-04-10'),
+('Definitely gonna come back again!', 4, 'D', '2018-04-10'),
+('Have a nice stay', 8, 'B', '2018-04-10'),
+('hello my name is kiki', 4, 'A', '2018-04-12'),
+('Great stay here', 4, 'B', '2018-04-12'),
+('test out here', 4, 'A', '2018-04-13');
 
 -- --------------------------------------------------------
 
@@ -67,7 +73,7 @@ INSERT INTO `members` (`memberNumber`, `lastName`, `firstName`, `email`, `phoneN
 (1, 'Ma', 'Jack', 'jma@taobao.com', '7787787778', 'China', '$2y$10$lkeLxdtcxhm3QZSvixDkpeI/6qvy2Z8GVKWoSzLMXqv0M5k3J67J6'),
 (2, 'Hortons', 'Tim', 'timhortons@timhortons.ca', '7789999999', 'Canada', '$2y$10$lkeLxdtcxhm3QZSvixDkpeI/6qvy2Z8GVKWoSzLMXqv0M5k3J67J6'),
 (3, 'Jobs', 'Steve', 'sjobs@apple.com', '7787766666', 'USA', '$2y$10$lkeLxdtcxhm3QZSvixDkpeI/6qvy2Z8GVKWoSzLMXqv0M5k3J67J6'),
-(4, 'Zhang', 'Kiki', 'kikizhangqi@outlook.com', '7787787777', 'China', '$2y$10$uIcM5KkG1iyY5.tSetfB.OAID0WwiT4eYrac5HE2SW72kYZyq27ra'),
+(4, 'Zhang', 'Kiki', 'kikizhangqi@outlook.com', '7787787778', 'China', '$2y$10$uIcM5KkG1iyY5.tSetfB.OAID0WwiT4eYrac5HE2SW72kYZyq27ra'),
 (5, 'Zou', 'Jenny', 'yyzou@sfu.ca', '6041234567', 'Canada', '$2y$10$TmrlmZ6CAulfhEmnDsK5fuUBxByrKRY6o/znH9W7mcKyxpvLckly6'),
 (6, 'Zhang', 'Qi', 'kkz@outlook.com', '6138906438', 'Canada', '$2y$10$HyVXPHCWwSJHnbAlUgAq5eI8PJZfILL/olZ7pjzY4bkmcTfPmNOkC');
 
@@ -100,12 +106,7 @@ INSERT INTO `reservation` (`bookingNumber`, `bookingDate`, `checkInDate`, `check
 (1, '2018-03-01', '2018-03-09', '2018-03-10', 1, 2, 1, 950, 'A', 1001, 'Double', 'Sea view'),
 (2, '2018-03-26', '2018-04-09', '2018-04-14', 2, 1, 1, 1300, 'C', 2003, 'Double', ''),
 (3, '2018-03-31', '2018-04-22', '2018-04-23', 4, 2, 1, 1300, 'C', 2003, 'Double', 'Hill view'),
-(4, '2018-04-02', '2018-04-09', '2018-04-14', 4, 2, 1, 1300, 'C', 2004, 'Twin', 'First floor'),
-(18, '2018-04-03', '2018-04-18', '2018-04-19', 4, 2, 1, 950, 'A', 0, 'Twin', ''),
-(21, '2018-04-03', '2018-04-11', '2018-04-26', 5, 1, 1, 2500, 'E', 0, 'Twin', ''),
-(24, '2018-04-03', '2018-04-08', '2018-04-09', 5, 2, 1, 1480, 'D', 0, 'Twin', ''),
-(26, '2018-04-03', '2018-04-09', '2018-04-14', 4, 1, 1, 950, 'A', 0, 'Double', ''),
-(30, '2018-04-03', '2018-04-03', '2018-04-04', 6, 2, 1, 1085, 'B', 0, 'Double', '');
+(4, '2018-04-02', '2018-04-09', '2018-04-14', 4, 2, 1, 1300, 'C', 2004, 'Twin', 'First floor');
 
 -- --------------------------------------------------------
 
@@ -156,11 +157,11 @@ CREATE TABLE `roomtype` (
 --
 
 INSERT INTO `roomtype` (`roomType`, `roomTypeDescription`, `bedType`, `area`, `numberOfOccupants`, `numberOfRooms`, `price`, `image`) VALUES
-('A', 'toothbrush / toothpaste / shower cap / cotton balls / cotton swabs / shampoo / conditioner / body wash / hand soap / slippers / bottled water / refrigerator / safe / electric kettle / hair dryer / wall-mounted CD player / Wi-Fi', 'Double', '26-28', 2, 16, 950, 'images/rooms_type_a_1.jpg'),
-('B', 'toothbrush / toothpaste / shower cap / cotton balls / cotton swabs / shampoo / conditioner / body wash / hand soap / slippers / bottled water / refrigerator / safe / electric kettle / hair dryer / wall-mounted CD player / Wi-Fi', 'Double/Twin', '32-35', 2, 26, 1085, 'images/rooms_type_b_1.jpg'),
-('C', 'toothbrush / toothpaste / shower cap / cotton balls / cotton swabs / shampoo / conditioner / body wash / hand soap / slippers / bottled water / refrigerator / safe / electric kettle / hair dryer / wall-mounted CD player / Wi-Fi', 'Double/Twin', '38-39', 2, 21, 1300, 'images/rooms_type_c_1.jpg'),
-('D', 'toothbrush / toothpaste / shower cap / cotton balls / cotton swabs / shampoo / conditioner / body wash / hand soap / slippers / bottled water / refrigerator / safe / electric kettle / hair dryer / wall-mounted CD player / Wi-Fi / Bathtub', 'Double/Twin', '42-46', 2, 12, 1480, 'images/rooms_type_d_1.jpg'),
-('E', 'toothbrush / toothpaste / shower cap / cotton balls / cotton swabs / shampoo / conditioner / body wash / hand soap / slippers / bottled water / refrigerator / safe / electric kettle / hair dryer / wall-mounted CD player / Wi-Fi / Bathtub', 'Twin', '51-61', 2, 4, 2500, 'images/rooms_type_e_1.jpg');
+('A', 'toothbrush / toothpaste / shower cap / cotton balls / cotton swabs / shampoo / conditioner / body wash / hand soap / slippers / bottled water / refrigerator / safe / electric kettle / hair dryer / wall-mounted CD player / Wi-Fi', 'Double', '26-28', 2, 16, 950, 'images/rooms_type_a_1.jpg;images/rooms_type_a_2.jpg;images/rooms_type_a_3.jpg;images/rooms_type_a_4.jpg'),
+('B', 'toothbrush / toothpaste / shower cap / cotton balls / cotton swabs / shampoo / conditioner / body wash / hand soap / slippers / bottled water / refrigerator / safe / electric kettle / hair dryer / wall-mounted CD player / Wi-Fi', 'Double/Twin', '32-35', 2, 26, 1085, 'images/rooms_type_b_1.jpg;images/rooms_type_b_2.jpg;images/rooms_type_b_3.jpg;images/rooms_type_b_4.jpg'),
+('C', 'toothbrush / toothpaste / shower cap / cotton balls / cotton swabs / shampoo / conditioner / body wash / hand soap / slippers / bottled water / refrigerator / safe / electric kettle / hair dryer / wall-mounted CD player / Wi-Fi', 'Double/Twin', '38-39', 2, 21, 1300, 'images/rooms_type_c_1.jpg;images/rooms_type_c_2.jpg;images/rooms_type_c_3.jpg;images/rooms_type_c_4.jpg'),
+('D', 'toothbrush / toothpaste / shower cap / cotton balls / cotton swabs / shampoo / conditioner / body wash / hand soap / slippers / bottled water / refrigerator / safe / electric kettle / hair dryer / wall-mounted CD player / Wi-Fi / Bathtub', 'Double/Twin', '42-46', 2, 12, 1480, 'images/rooms_type_d_1.jpg;images/rooms_type_d_2.jpg;images/rooms_type_d_3.jpg;images/rooms_type_d_4.jpg'),
+('E', 'toothbrush / toothpaste / shower cap / cotton balls / cotton swabs / shampoo / conditioner / body wash / hand soap / slippers / bottled water / refrigerator / safe / electric kettle / hair dryer / wall-mounted CD player / Wi-Fi / Bathtub', 'Twin', '51-61', 2, 4, 2500, 'images/rooms_type_e_1.jpg;images/rooms_type_e_2.jpg;images/rooms_type_e_3.jpg;images/rooms_type_e_4.jpg');
 
 --
 -- Indexes for dumped tables
@@ -204,7 +205,7 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `bookingNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `bookingNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
