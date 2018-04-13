@@ -397,7 +397,7 @@ define("DB_NAME", "hotel");
     // $hashed_password = password_hash($admin['password'], PASSWORD_BCRYPT);
 
     $sql = "INSERT INTO reservation ";
-    $sql .= "(memberNumber, bookingDate, checkInDate, checkOutDate, numberOfGuests, numberOfRoomBooked, bedType, roomType, priceEach) ";
+    $sql .= "(memberNumber, bookingDate, checkInDate, checkOutDate, numberOfGuests, numberOfRoomBooked, bedType, roomType, roomNumber, priceEach, bookingComments) ";
     $sql .= "VALUES (";
     $sql .= "'" . db_escape($db, $reserve['memberNumber']) . "',";
     $sql .= "'" . db_escape($db, $reserve['bookingDate']) . "',";
@@ -407,10 +407,12 @@ define("DB_NAME", "hotel");
     $sql .= "'" . db_escape($db, $reserve['numberOfRoomBooked']) . "',";
     $sql .= "'" . db_escape($db, $reserve['bedType']) . "',";
     $sql .= "'" . db_escape($db, $reserve['roomType']) . "',";
-    $sql .= "'" . db_escape($db, $reserve['priceEach']) . "'";
+    $sql .= "'" . db_escape($db, $reserve['roomNumber']) . "',";
+    $sql .= "'" . db_escape($db, $reserve['priceEach']) . "',";
+    $sql .= "'" . db_escape($db, $reserve['bookingComments']) . "'";
     $sql .= ")";
     $result = mysqli_query($db, $sql);
-
+    //echo $sql;
     // For INSERT statements, $result is true/false
     if($result) {
       return true;
@@ -443,6 +445,7 @@ define("DB_NAME", "hotel");
     $sql .= "'" . db_escape($db, $comment['room']) . "',";
     $sql .= "'" . db_escape($db, date("Y-m-d")) . "'";
     $sql .= ")";
+    echo $sql;
     $result = mysqli_query($db, $sql);
 
     // For INSERT statements, $result is true/false

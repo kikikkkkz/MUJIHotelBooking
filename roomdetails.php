@@ -132,7 +132,7 @@ $(document).ready(function(){
 <?php
 
 //check availability
-echo "<form action=\"availability.php\" method=\"POST\">";
+echo "<form action=\"availability.php?room=$room\" method=\"POST\">";
 echo "<input type=\"submit\" value=\"Check Availability\">";
 if($_SESSION['callback_url']!=url_for('reservation.php')){
 	$_SESSION['room']=$room; //room viewed on reservation will not be added again 

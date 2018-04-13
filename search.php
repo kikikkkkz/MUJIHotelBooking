@@ -31,9 +31,7 @@ if(is_post_request()) {
 	redirect_to(url_for('searchresult.php?checkIn='.$checkIn.'checkOut='.$checkOut));
 	}
 }
-
 $_SESSION['callback_url']=url_for('search.php');
-
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +56,7 @@ $_SESSION['callback_url']=url_for('search.php');
         $('#checkOut').datepicker({
             dateFormat: "yy-mm-dd",
             numberOfMonth: 1,
+            minDate: 0,
             onClose: function (date) {                
                 var from = $('#checkIn').datepicker('getDate');
                 //console.log(from); //for debugging

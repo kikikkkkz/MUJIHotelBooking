@@ -1,3 +1,16 @@
+<?php
+include('header.php');
+
+$query_str = "SELECT checkInDate, checkOutDate, roomNumber, roomType
+              FROM reservation
+              WHERE roomType= 'A'";
+
+echo $query_str;
+
+
+
+?>
+
 <html>
 <head>
         <!-- jquery -->
@@ -10,7 +23,9 @@
 
 <body>
     Date Range Disable<input id="datepicker" />
-    </body>
+    
+
+</body>
 
     
 <script> 
@@ -22,11 +37,13 @@ var cbe1 = new Date('April 24, 2018');
 
 $(document).ready(function() {
    $('#datepicker').datepicker({
+        dateFormate: "yy-mm-dd",
+        numberOfMonth: 1,
+        minDate:0,
         beforeShowDay: function(date) {
             var day = date.getDay();
             if(day==0 || day==6) {
                 return [false];
-
             }
             else 
                 return [true];
@@ -37,4 +54,8 @@ $(document).ready(function() {
 </script>
 
 </html>
+
+<?php
+include('footer.php');
+?>
 

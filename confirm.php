@@ -47,30 +47,45 @@ echo "Check-out | $checkOut 12:00<br>";
 
 echo "<br>";
 
-$query_str = "SELECT price FROM roomtype WHERE roomType = ?";
+//assigning the room number
+$query_str = "SELECT DISTINCT room.roomNumber, roomType.price 
+			  FROM room
+			  LEFT JOIN roomtype ON room.roomType = roomtype.roomType
+			  WHERE room.roomType = '".$room."' AND
+			  room.roomNumber NOT IN
+			  (	SELECT roomNumber 
+				FROM reservation
+				WHERE checkInDate <= '".$checkIn."' AND checkOutDate > '".$checkIn."'
+			 	OR (checkInDate < '".$checkOut."' AND checkOutDate >= '".$checkOut."')
+			 	OR (checkInDate >= '".$checkIn."' AND checkOutDate <= '".$checkOut."')
+			  ) 
+			  ORDER BY room.roomNumber ASC LIMIT 1;";
+$res = $db->query($query_str);
 
-$stmt = $db->prepare($query_str);
-$stmt->bind_param('s',$room);
-$stmt->execute();
-$stmt->bind_result($price1);;
 
-
-echo "<h3>Room Information</h3>";
-if($stmt->fetch()) {
+//echo $query_str;
+foreach($res as $row) {
 	echo "<b>Room type</b> | Type $room<br>";
-	echo "<b>Price</b> | RMB $price1 /night<br>";
+	echo "<b>Room Number</b> | ".$row['roomNumber']."<br />";
+	echo "<b>Number of room</b> | 1<br>";
+	echo "<b>Number of guests</b> | ".$_SESSION['occupants']."<br>";
+	echo "<b>Type of bed type</b> | ".$_SESSION['bed']."<br>";
+
+	echo "<h3>Price | RMB ".$row['price']." /night</h3><br>";
+	$_SESSION['priceEach']=$row['price'];
+	$_SESSION['roomNumber']=$row['roomNumber'];
 }
-$_SESSION['priceEach']=$price1;
+$res->free_result();
 
-$stmt->free_result();
 
-echo "<b>Number of room</b> | 1<br>";
-echo "<b>Number of guests</b> | ".$_SESSION['occupants']."<br>";
-echo "<b>Type of bed type</b> | ".$_SESSION['bed']."<br>";
-
-echo "<br>";
+//confirm button
+echo "<br />";
 echo "<form action=\"reservation.php\" method=\"POST\">";
-echo "<input type=\"submit\" name=\"confirm\" value=\"Confirm\">";
+echo "Booking Comments<br />";
+echo "<textarea type=\"text\" name=\"bookingComments\" rows=\"5\" cols=\"40\" placeholder=\"Anything you want us to prepare...\" value=\"";
+	if(isset($_POST['bookingComments'])) echo $_POST['bookingComments'];
+		echo "\" ></textarea><br />";
+echo "<br /><input type=\"submit\" name=\"confirm\" value=\"Confirm\">";
 echo "</form>";
 
 echo "</div>";

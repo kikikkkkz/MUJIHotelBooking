@@ -19,7 +19,12 @@ if(is_post_request()){
 	$reserve['bedType']=$_SESSION['bed'];
 	$reserve['roomType']=$_SESSION['room'];
 	$reserve['priceEach']=$_SESSION['priceEach'];
-
+	$reserve['roomNumber']=$_SESSION['roomNumber'];
+	if(isset($_POST['bookingComments'])) {
+		$reserve['bookingComments']=$_POST['bookingComments'];
+		$_SESSION['bookingComments']=$_POST['bookingComments'];
+	}
+	
 	$result = insert_reserve($reserve);
     if($result === true) {
       $new_id = mysqli_insert_id($db); //insert id to database
@@ -27,9 +32,10 @@ if(is_post_request()){
       $_SESSION['booking_id']=$new_id; //set session booking number
       
       echo "<h2>Thank you for your reservation!</h2>";
-      echo "Your booking number is ".$_SESSION['booking_id'].".<br>";
+      echo "Your booking number is <b>".$_SESSION['booking_id'].".</b><br>";
       echo "Have a nice stay in MUJI!<br>";
-      echo "<h2>An confirmation email is sent to your email account.</h2><br />";
+      //echo $_POST['bookingComment'];
+      // echo "<h2>An confirmation email is sent to your email account.</h2><br />";
       
 
       unset($_SESSION['check_in']);
@@ -38,6 +44,8 @@ if(is_post_request()){
       unset($_SESSION['bed']);
       unset($_SESSION['room']);
       unset($_SESSION['priceEach']);
+      unset($_SESSION['roomNumber']);
+      unset($_SESSION['bookingComment']);
     } else {
       $errors = $result; //error message
       echo $errors;
@@ -52,6 +60,8 @@ if(is_post_request()){
 	$reserve['bedType']='';
 	$reserve['roomType']='';
 	$reserve['priceEach']='';
+	$reserve['roomNumber']='';
+	$reserve['bookingComment']='';
 }
 
 echo "<br>";
