@@ -49,7 +49,7 @@ if ($res->num_rows > 0) {
   echo "<br />There's no reservation on Type ".$room;
 }
 
-
+echo "<br>";
 ?> 
 
 <body>

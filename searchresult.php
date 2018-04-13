@@ -62,7 +62,8 @@ if($res->num_rows > 0) {
 		echo "<h3>TYPE ".$row['roomType']."</h3>\n";
 
 		echo "<div class=\"box\">";
-		echo "<div id=\"room-image\"><img src=".$row['image']." width=\"100%\" alt=\"\" /></div>";
+		$img=explode(";",$row['image']);
+		echo "<div id=\"room-image\"><img src=".$img[0]." width=\"100%\" alt=\"\" /></div>";
 		echo "<p></div>";
 
 		echo "<div class=\"box\">";
@@ -108,22 +109,5 @@ echo "</div>";
 $res->free_result();
 $db->close();
 
-?>
-
-
-<!DOCTYPE html>
-
-<html>
-<head>
-
-</head>
-
-<body>
-
-</body>
-
-</html>
-
-<?php
 include('footer.php');
 ?>

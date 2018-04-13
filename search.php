@@ -34,11 +34,9 @@ if(is_post_request()) {
 $_SESSION['callback_url']=url_for('search.php');
 ?>
 
-<!DOCTYPE html>
-
 
 <html>
-<head>
+
 
 	<script>
 		$(document).ready(function () {
@@ -75,9 +73,7 @@ $_SESSION['callback_url']=url_for('search.php');
 		})
 	</script>
 
-</head>
 
-<body>
     <div class="search">
 	<h1>Start your booking</h1>
 
@@ -99,7 +95,7 @@ $_SESSION['callback_url']=url_for('search.php');
 	</form>
     </div>
     </div>
-</body>
+
 
 </html>
 

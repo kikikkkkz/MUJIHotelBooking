@@ -31,6 +31,7 @@
 </head>
 
 <body>
+<div id="container">
 
 <div class="header">
 <!-- 	<img src="images/title.jpg" class="cover" /> -->
@@ -62,7 +63,7 @@
 </div>
 
 
-
+<div class="body">
 
 
 <!--header ends here-->

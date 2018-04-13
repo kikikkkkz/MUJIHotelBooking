@@ -16,9 +16,10 @@ $res = $db->query($query_str);
 //list all items
 while($row = $res->fetch_row()){
 	echo "<div class=\"box1\">";
+	$img=explode(";",$row[4]);
 	echo "<div id=\"cover-image\"><a href=";	
 	echo url_for('roomdetails.php?room='.$row[0]);
-	echo "><img src=".$row[4]." width=\"100%\" alt=\"\" /></a></div>";
+	echo "><img src=".$img[0]." width=\"100%\" alt=\"\" /></a></div>";
 	echo "</div>";
 
 	echo "<div class=\"box1\">";
