@@ -3,6 +3,10 @@ require_once('initialize.php');
 $id=$_SESSION['admin_id'];
 $_SESSION['callback_url']=url_for('profile.php?id='.$id);
 
+if(isset($_POST['delete'])){
+	delete_comment($_POST['hidden']);
+}
+
 //select all properties from roomtype 
 $query_str = "SELECT lastName,firstName,email,phoneNumber,country, imagePath FROM members WHERE memberNumber = ?";
 			  
@@ -79,7 +83,7 @@ $res->free_result();
 echo "<br>";
 
 //display comments posted by the member
-$query_str = "SELECT content, timePosted, roomType FROM comment WHERE memberNumber = ".$id."";
+$query_str = "SELECT id, content, timePosted, roomType FROM comment WHERE memberNumber = ".$id."";
 			  
 $res = $db->query($query_str);
 
@@ -90,18 +94,57 @@ echo "<table cellspacing=5>";
 
 if($res->num_rows > 0) {
 	while ($row = $res->fetch_assoc()) {
+		// echo "<tr><td>".$row['timePosted']."</td> <td>|</td>"; 
+		// echo "<td><b><a href=";
+		// echo url_for('roomdetails.php?room='.$row['roomType']);
+		// echo ">Type ".$row['roomType']."</a></b></td></tr>";
+		// echo "<tr><td> <td>|</td> </td><td>".$row['content']."</td></tr>";
+		$url=url_for('profile.php');
+		echo "<form action=$url method=POST>";
 		echo "<tr><td>".$row['timePosted']."</td> <td>|</td>"; 
 		echo "<td><b><a href=";
 		echo url_for('roomdetails.php?room='.$row['roomType']);
 		echo ">Type ".$row['roomType']."</a></b></td></tr>";
-		echo "<tr><td> <td>|</td> </td><td>".$row['content']."</td></tr>";
+		echo "<tr><td> <td>|</td> </td><td>".$row['content']."</td>";
+		echo "<td><input class=del type=submit name=delete value=delete></td></tr>";
+		echo "<tr><td><input type=hidden name=hidden value=".$row['id']."></td></tr>";
+		echo "</form>";
 	}
 }else{
 	echo "Haven't posted any comments yet."; //show 0 result it there is nothing matched 
 }
 echo "</p></table>";
+
+echo "<div id=\"display_comment\"></div>";
+
 echo "</div>";
 
+?>
+
+<script>
+$(document).ready(function(){
+	
+	load_comment();
+
+	function load_comment()
+	{
+	  $.ajax({
+	   url:"fetch_comment_user.php",
+	   method:"POST",
+	   success:function(data)
+	   {
+	    $('#display_comment').html(data);
+	   }
+	  })
+	}
+
+	
+
+});
+
+</script>
+
+<?php
 
 $res->free_result();
 
