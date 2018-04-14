@@ -19,7 +19,7 @@ echo "Check-out | $checkOut<br />";
 ?>
 
 
-<button type="button"><a href="<?php echo url_for('search.php'); ?>" style= "text-decoration:none;">Edit Search</a></button>
+<br /><button type="button" class="btn"><a href="<?php echo url_for('search.php'); ?>" style= "text-decoration:none;">Edit Search</a></button>
 
 <?php
 
@@ -61,12 +61,12 @@ if($res->num_rows > 0) {
 		echo "<form action=\"confirm.php?room=$id\" method=\"POST\">";
 		echo "<h3>TYPE ".$row['roomType']."</h3>\n";
 
-		echo "<div class=\"box\">";
+		echo "<div class=\"box2\">";
 		$img=explode(";",$row['image']);
 		echo "<div id=\"room-image\"><img src=".$img[0]." width=\"100%\" alt=\"\" /></div>";
 		echo "<p></div>";
 
-		echo "<div class=\"box\">";
+		echo "<div class=\"box2\">";
 		echo "Area ".$row['area']."m<sup>2</sup><br>
 		Bed Type | ".$row['bedType']." <br>
 		1-".$row['numberOfOccupants']. " Occupants<br>
@@ -92,7 +92,7 @@ if($res->num_rows > 0) {
 			<input type=\"radio\" name=\"bed\" value=\"Twin\"> Twin<br>";
 		}
 		echo "<br>";
-		echo "<input type=\"submit\" name=\"book\" value=\"Book\">";
+		echo "<b><input type=\"submit\" id=\"search\" name=\"book\" value=\"Book\"></b>";
 		// if($_SESSION['callback_url']!=url_for('search.php')){
 		// 	$_SESSION['room']=$row['roomType']; //room viewed on reservation will not be added again 
 		// }

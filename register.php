@@ -114,7 +114,7 @@ if(is_post_request()&&isset($_POST['create'])) {
       
       <br />
 
-      <input type="submit" name="create" value="Create Account" />
+      <input type="submit" class="btn" name="create" value="Register" />
   
     <br />
 

@@ -23,9 +23,9 @@ while($row = $res->fetch_row()){
 	echo "><img src=".$img[0]." width=\"100%\" alt=\"\" /></a></div>";
 	echo "</div>";
 
-	echo "<div class=\"box1\"><br /><br /><br />";
+	echo "<div class=\"box1\"><br /><br /><br /><h3 class=\"title\">";
 	format_name_as_link($row[0], $row[0], "roomdetails.php"); //each item links to specific model
-	echo "<p>";
+	echo "</h3><p>";
 	echo "Area ".$row['1']." m<sup>2</sup><br>
 	Bed Type | ".$row['2']." <br>
 	Room Rate <b>RMB ".$row['3']."</b> /night<br>";

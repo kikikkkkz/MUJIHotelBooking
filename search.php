@@ -80,7 +80,7 @@ $_SESSION['callback_url']=url_for('search.php');
 
     <div class="search1">
 	<form action="search.php" method="post">
-		<table>
+		<table cellspacing = 10>
 		<tr><th>Check-in </th>
 		<th>Check-out </th></tr>
 		
