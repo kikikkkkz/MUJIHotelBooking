@@ -36,10 +36,6 @@ if($stmt->fetch()) {
 	echo "<img class=\"mySlides\" src=$img[1] style=\"width:100%\">";
 	echo "<img class=\"mySlides\" src=$img[2] style=\"width:100%\">";
 	echo "<img class=\"mySlides\" src=$img[3] style=\"width:100%\">";
-	// foreach ($img as $item){
-	// 	echo "<img class=\"mySlides\" src=$item style=\"width:100%\">";
-
-	// }
 ?>
 	<div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
     <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
@@ -89,30 +85,9 @@ if(isset($_SESSION['admin_id'])) {
    <br />
 </body>
 </html>
-<?php
-	// echo "<br>";
-	// if(is_post_request() && isset($_POST['submit'])){
-	// 	$comment['content']=$_POST['content'] ?? '';
-	// 	$comment['room']=$room;
-	// 	$result = insert_comment($comment);
-	// 	if($result === true) {
-	//       echo "<p>Comment successful.</p>";
-	//       unset($_POST['submit']);
-	//       $comment='';
-	//     } else {
-	//       $errors = $result; //error message
-	//       echo $errors;
-	//     }
-	// }
-	// echo "<a href=# class=\"comment_link\">Write Comments</a>";
-	// echo "<div class=\"comment_form dno\">";
-	// echo "<form method=\"POST\">";
-	// echo "<textarea rows=\"4\" cols=\"50\" id=\"comment_name\" name=\"comment_name\"></textarea>";
-	// echo "<br /><button name=\"submit\" id=\"submit\">Post Comments</button>";
-	// echo "</form></div>";
-	// echo "<span id=\"comment_message\"></span>";
-} 
 
+<?php
+} 
 
 ?>
 

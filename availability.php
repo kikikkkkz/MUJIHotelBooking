@@ -9,8 +9,7 @@ echo "<div class=\"availability\">";
  
 $errors = $checkIn = $checkOut = []; 
 $room = ''; 
- 
-
+$roomInfo = array();
 //echo $room; 
 if(isset($_SESSION['room'])) $room = $_SESSION['room'];  
 echo "<button type=\"button\"><a href="; 
@@ -39,7 +38,8 @@ if ($res->num_rows > 0) {
     echo $roomNumber."<br />";
     echo $checkIn."<br />";
     echo $checkOut."<br />";
-
+    array_push($roomInfo, array($roomNumber,$checkIn,$checkOut));
+    echo "<br><input id=\"dateFilter\" /><br>";
   }
   // echo "<br />";
   //print_r($checkIn);
@@ -49,14 +49,14 @@ if ($res->num_rows > 0) {
   echo "<br />There's no reservation on Type ".$room;
 }
 
+print_r($roomInfo);
 echo "<br>";
 ?> 
 
 <body>
-    <br />Room of Type <?php echo $room;?><input id="datepicker" />  
-    <br />Room of Type <?php echo $room;?><input id="dateFilter" /> 
+    <!-- <br />Room of Type <?php echo $room;?><input id="datepicker" />  
+    <br />Room of Type <?php echo $room;?><input id="dateFilter" />  -->
 
-  </div> 
 </body>
 
     
@@ -101,9 +101,10 @@ function unavailable(date) {
    });
 
    //disable a date range
-  //var startDate = <?php echo json_encode($checkIn) ?>;
-  var startDate = "2018-04-11";
-  var endDate = "2018-04-22";
+  var startDate = <?php echo json_encode($roomInfo[0][1]); ?>;
+  var endDate = <?php echo json_encode($roomInfo[0][2]); ?>;
+  // var startDate = "2018-04-11";
+  // var endDate = "2018-04-22";
   var dateRange = [];
 
   for (var d = new Date(startDate);
@@ -112,7 +113,7 @@ function unavailable(date) {
                   dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
           }
 
-  $('#dateFilter'+'#room').datepicker({
+  $('#dateFilter').datepicker({
       beforeShowDay: function (date) {
           var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
           //console.log(dateString);
@@ -120,8 +121,8 @@ function unavailable(date) {
       }
   });
 </script>
-
-
+<!-- <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/redmond/jquery-ui.css" rel="stylesheet" type="text/css" /> -->
+    
  
 <?php 
 include('footer.php'); 
