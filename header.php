@@ -55,7 +55,7 @@
 			echo "<li><a href=\"$url\"> Logout</a></li>";
 		}else{
 			$url=url_for('login.php');
-			echo "<li><a href=\"$url\">Login</a></li>";
+			echo "<li><a href=\"$url\">Login/Sign up</a></li>";
 		}
 		?>
 	</ul>
