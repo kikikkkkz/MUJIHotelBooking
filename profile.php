@@ -30,7 +30,6 @@ if($stmt->fetch()) {
 $stmt->free_result();
 
 $_SESSION['imagePath'] = $imagePath1;
-$_SESSION['firstName'] = $first1;
 
 //updating the info
 echo "\t<button type=\"button\"><a href=\"update.php\">Edit</a></button>";

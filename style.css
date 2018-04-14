@@ -36,16 +36,16 @@ body {
    min-height:100%;
    position:relative;
 }
-/*.header {
+.header {
 	background-size: cover;
 	background-position: center;
     background-repeat: no-repeat;
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
 
 	
-	background-image: url("images/title.jpg");*/
-	/*background-color: rgba(0,0,0,0.3);
+	/*background-image: url("images/title.jpg");*/
+	background-color: rgba(0,0,0,0.3);
 }
 
 .cover {
@@ -57,17 +57,16 @@ body {
    padding:10px;
    padding-bottom:60px;   
 }
-*/
+
 
 .footer {
-	text-align: center; 
-	padding: 7em;
+	text-align: center;
+	bottom:0; 
 	/*background-color: #AAA;*/
-	margin-top: 10em;
 }
 
 footer span {
-  color: white;
+  color: #AAA;
   padding: 2em;
 }
 
@@ -90,7 +89,6 @@ li {
 
 h3 {
 	letter-spacing: 1px;
-	font-weight: 700;
 }
 
 h2,
@@ -113,19 +111,23 @@ a:visited {
 
 
 .logo {
+	padding: 0.3em;
 	font-size: 1.45em;
-	margin-left: 2em;
+	margin-left: 1em;
 }
 
 .main-nav {
-	padding: 2em;
-	background-color: rgba(192,192,192,0.3);
+	margin-top: 5px;
 
 }
 
 .logo a,
 .main-nav a {
+	padding: 10px 15px;
+	text-transform: uppercase;
 	text-align: center;
+	letter-spacing: 0.5px;
+	display: block;
 }
 
 .main-nav a {
@@ -134,7 +136,7 @@ a:visited {
 }
 
 .main-nav a:hover {
-	color: #FFF;
+	color: #718daa;
 }
 
 
@@ -178,7 +180,6 @@ a:visited {
 }
 
 .box1 {
-	color: #34495e;
     display: inline-block;
     width: 50%;
     height: 60%;
@@ -188,8 +189,6 @@ a:visited {
 }
 
 .box1 a {
-	color: #34495e
-	border: 2px solid #34495e;
 	font-size: 30px;
 	letter-spacing: 2px;
 }
@@ -209,24 +208,8 @@ a:visited {
 	padding: 1em;
 }
 
-.details p, #display_comment{
+.details p{
 	width: 60%;
-	margin: 2em auto;
-	display: block;
-}
-
-.details h3, #book {
-	margin: 2em auto;
-	text-align: center;
-	display: block;
-}
-
-
-
-
-#display_comment {
-	border: 10px solid #34495e;
-	padding: 2em;
 }
 
 /*login css*/
@@ -268,14 +251,8 @@ a:visited {
 }
 
 .search tr, th, td{
-	padding: 0 0.3em;
+	padding: 0 0.2em;
 }
-
-.search input {
-	height: 40px;
-	font-size: 22px;
-}
-
 
 
 /*searchresult css*/
@@ -296,16 +273,11 @@ a:visited {
 	margin: auto;
 }
 
-.box2 {
+.box {
 	display: inline-block;
 	width: 50%;
 	float: left;
 	padding: 1em;
-	margin: 2em 0;
-}
-
-.roomtype form{
-	margin: 3em 0;
 }
 
 #room-image {
@@ -402,91 +374,8 @@ label img {
 }
 
 
-
-html, body
-{
-    margin: 0px;
-}
-
-header
-{	
-	font-family: 'Roboto', sans-serif;
-    margin-bottom: 5em;
-	text-align: center;
-    /*background: #555;*/
-    background-image: url("images/rooms_type_c_4.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 80%;
-}
-
-header h1
-{
-    color: #AAA;
-    font-size: 40px;
-    font-weight: lighter;
-    margin-bottom: 5px;
-}
-
-header span
-{
-    color: #222;
-}
-
-footer span
-{
-  color: #AAA;
-}
- 
-div.container
-{
-    font-family: 'Roboto', sans-serif;
-    margin: 0 auto;
-	padding-top: 1em;
-	padding-left: 1em;
-	text-align: center;
-	text-transform: uppercase;
-	letter-spacing: 0.2em;
-}
-
-div.container a
-{
-    text-decoration: none;
-    font: 40px Roboto;
-    margin: 0px 10px;
-    padding: 10px 10px;
-    position: relative;
-    z-index: 0;
-    cursor: pointer;
-}
-
-div.box
-{
-    font-family: 'Roboto', sans-serif;
-    width: 100%;
-	padding-top: 1em;
-	margin-left: 12em;
-	text-align: center;
-	text-transform: uppercase;
-	letter-spacing: 0.1em;
-}
-
-div.box a
-{
-    color: #FFF;
-    text-decoration: none;
-    font: 18px Roboto;
-    margin: 0px 10px;
-    padding: 10px 10px;
-    position: relative;
-    z-index: 0;
-    cursor: pointer;
-}
-
-/* css for navigation bar - Top and Bottom borders go out */
-div.topBotomBordersOut a:before, div.topBotomBordersOut a:after
+/* Top and Bottom borders go out */
+ul.topBotomBordersOut a:before, ul.topBotomBordersOut a:after
 {
     position: absolute;
     left: 0px;
@@ -498,43 +387,26 @@ div.topBotomBordersOut a:before, div.topBotomBordersOut a:after
     transition: all 0.3s;
 }
 
-div.topBotomBordersOut a:before
+ul.topBotomBordersOut a:before
 {
     top: 0px;
     transform: translateY(10px);
 }
 
-div.topBotomBordersOut a:after
+ul.topBotomBordersOut a:after
 {
     bottom: 0px;
     transform: translateY(-10px);
 }
 
-div.topBotomBordersOut a:hover:before, div.topBotomBordersOut a:hover:after
+ul.topBotomBordersOut a:hover:before, ul.topBotomBordersOut a:hover:after
 {
     opacity: 1;
     transform: translateY(0px);
 }
 
-#search {
-	font-size: 18px;
-	letter-spacing: 0.2em;
-	text-transform: uppercase;
-	font-weight: 700;
-}
-
-#search, #post, .btn, button{
-	border: 2px solid #34495e;
-	color: #34495e;
-	background-color: #FFF;
-	padding: 0.3em 1.2em;
-}
 
 
-.btn:hover, #search:hover, #post:hover, button:hover{
-    border: 2px solid #34495e;
-    background-color: #34495e;
-    color: #FFF;
-	padding: 0.3em 1.2em;
+
 
 

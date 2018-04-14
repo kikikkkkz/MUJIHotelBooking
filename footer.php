@@ -1,8 +1,7 @@
 
 <!--footer starts here-->
-</div>
 </body>
-
+</div>
 
 <div class="footer">
 <footer>
