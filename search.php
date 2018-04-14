@@ -37,7 +37,6 @@ $_SESSION['callback_url']=url_for('search.php');
 
 <html>
 
-
 	<script>
 		$(document).ready(function () {
         $("#checkIn").datepicker({

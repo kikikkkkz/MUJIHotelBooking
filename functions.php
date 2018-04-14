@@ -129,12 +129,12 @@ define("DB_NAME", "hotel");
   $output = '';
   if(!empty($errors)) {
     $output .= "<div class=\"errors\">";
-    $output .= "Please fix the following errors:";
+    $output .= "<h3>Please fix the following errors:</h3>";
     $output .= "<ul>";
     foreach($errors as $error) {
-      $output .= "<li>" . h($error) . "</li>";
+      $output .= h($error) . "<br />";
     }
-    $output .= "</ul>";
+    $output .= "</ul><br />";
     $output .= "</div>";
   }
   return $output;
@@ -176,6 +176,10 @@ define("DB_NAME", "hotel");
       $errors[] = "Email not allowed. Try another.";
     }
 
+    if(is_blank($admin['avatar'])) {
+      $errors[] = "Avatar cannot be blank.";
+    }
+
     if(is_blank($admin['phone_number'])) {
       $errors[] = "Phone number cannot be blank.";
     } elseif (!has_length($admin['phone_number'], array('min' => 10, 'max' => 11))) {
@@ -206,6 +210,10 @@ define("DB_NAME", "hotel");
   function validate_update($admin, $options=[]) {
 
     $password_required = $options['password_required'] ?? true;
+
+    if(is_blank($admin['avatar'])) {
+      $errors[] = "Avatar cannot be blank.";
+    }
 
     if(is_blank($admin['first_name'])) {
       $errors[] = "First name cannot be blank.";
@@ -247,18 +255,20 @@ define("DB_NAME", "hotel");
     $hashed_password = password_hash($admin['password'], PASSWORD_BCRYPT);
 
     $sql = "INSERT INTO members ";
-    $sql .= "(firstName, lastName, email, phoneNumber, country, hashed_password) ";
+    $sql .= "(firstName, lastName, email, phoneNumber, country, hashed_password, image, imagePath) ";
     $sql .= "VALUES (";
     $sql .= "'" . db_escape($db, $admin['first_name']) . "',";
     $sql .= "'" . db_escape($db, $admin['last_name']) . "',";
     $sql .= "'" . db_escape($db, $admin['email']) . "',";
     $sql .= "'" . db_escape($db, $admin['phone_number']) . "',";
     $sql .= "'" . db_escape($db, $admin['country']) . "',";
-    $sql .= "'" . db_escape($db, $hashed_password) . "'";
+    $sql .= "'" . db_escape($db, $hashed_password) . "',";
+    $sql .= "LOAD_FILE('" . $_SERVER['DOCUMENT_ROOT']."/MUJIHotelBooking/".db_escape($db, $admin['avatar'])."'),";
+    $sql .= "'" . db_escape($db, $admin['avatar']) . "'";
     $sql .= ")";
     $result = mysqli_query($db, $sql);
-
-    // For INSERT statements, $result is true/false
+    //echo $sql;
+    //For INSERT statements, $result is true/false
     if($result) {
       return true;
     } else {
@@ -278,26 +288,21 @@ define("DB_NAME", "hotel");
       return $errors;
     }
 
-
-     // $query = "UPDATE members SET 
-     //    firstName = '".$admin['first_name'].
-     //    "', lastName = '".$admin['last_name'].
-     //    "', phoneNumber = '".$admin['phone_number'].
-     //    "', country = '".$admin['country'].
-     //    "' WHERE memberNumber = ".$id."";
-     //   $result = $db->query($query);
-
     $sql = "UPDATE members SET ";
     $sql .= "firstName='" . db_escape($db, $admin['first_name']) . "', ";
     $sql .= "lastName='" . db_escape($db, $admin['last_name']) . "', ";
     $sql .= "phoneNumber='" . db_escape($db, $admin['phone_number']) . "', ";
-    $sql .= "country='" . db_escape($db, $admin['country']) . "' ";
+    $sql .= "country='" . db_escape($db, $admin['country']) . "', ";
+    $sql .= "image=LOAD_FILE('" . $_SERVER['DOCUMENT_ROOT']."/MUJIHotelBooking/".db_escape($db, $admin['avatar'])."'),";
+    $sql .= "imagePath='" . db_escape($db, $admin['avatar']) . "'";
     $sql .= "WHERE memberNumber ='" . db_escape($db, $admin['id']) . "' ";
     $sql .= "LIMIT 1";
     $result = mysqli_query($db, $sql);
     //echo $sql;
 
-        // For UPDATE statements, $result is true/false
+
+
+    // For UPDATE statements, $result is true/false
     if($result) {
       return true;
     } else {

@@ -14,6 +14,7 @@ $query_str = "SELECT roomType, area, bedType, price, image FROM roomtype";
 $res = $db->query($query_str);
 
 //list all items
+echo "<div class=\"container\">";
 while($row = $res->fetch_row()){
 	echo "<div class=\"box1\">";
 	$img=explode(";",$row[4]);
@@ -22,7 +23,7 @@ while($row = $res->fetch_row()){
 	echo "><img src=".$img[0]." width=\"100%\" alt=\"\" /></a></div>";
 	echo "</div>";
 
-	echo "<div class=\"box1\">";
+	echo "<div class=\"box1\"><br /><br /><br />";
 	format_name_as_link($row[0], $row[0], "roomdetails.php"); //each item links to specific model
 	echo "<p>";
 	echo "Area ".$row['1']." m<sup>2</sup><br>
@@ -32,6 +33,7 @@ while($row = $res->fetch_row()){
 	echo "</p>";
 	echo "</div>";
 };
+echo "</div>";
 echo "</div>";
 
 

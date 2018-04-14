@@ -24,16 +24,20 @@ if (isset($_POST['update'])) {
   $admin['id'] = $id;
   $admin['first_name'] = $_POST['first_name'] ?? '';
   $admin['last_name'] = $_POST['last_name'] ?? '';
+  $admin['avatar'] = $_POST['avatar'] ?? '';
   $admin['phone_number'] = $_POST['phone_number'] ?? '';
   $admin['country'] = $_POST['country'] ?? '';
 
   $result = update_admin($admin);
   if($result === true) {
+      $_SESSION['imagePath'] = $admin['avatar']; //set session image path
     	redirect_to($_SESSION['callback_url']); //return to 
     } else {
-		$errors = $result1; //error message
+		$errors = $result; //error message
     }
   
+
+
 }
 
 ?>
@@ -49,10 +53,29 @@ if (isset($_POST['update'])) {
     <button type="button"><a href="<?php echo url_for('profile.php'); ?>">&laquo;Back to profile</a></button>
 
     <form method="post">
+           <div class="create">
+      <br />Avatar<br />
+      <ul>
+      <li><input type="radio" id="avatar1" name="avatar" value="images/avatar1.jpg" <?php if($rows['imagePath'] == "images/avatar1.jpg") echo "checked" ;  ?> >
+        <label for="avatar1"><img src="images/avatar1.jpg" style="width:200px"/></label>
+      </li>
+      
+      <li>
+       <input type="radio" id="avatar2" name="avatar" value="images/avatar2.jpg" <?php if($rows['imagePath'] == "images/avatar2.jpg") echo "checked" ;  ?>>
+      <label for="avatar2"><img src="images/avatar2.jpg" style="width:200px"/></label>
+     </li>
+
+     <li>
+      <input type="radio" id="avatar3" name="avatar" value="images/avatar3.jpg" <?php if($rows['imagePath'] == "images/avatar3.jpg") echo "checked" ;  ?>>
+      <label for="avatar3"><img src="images/avatar3.jpg" style="width:200px"/></label>   
+    </li>
+  </ul>
+      </div>
+
       <table cellspacing="10">
       	<tr>
-        <td>Email</td>
-        <td><input type="text" name="email" value="<?php echo $rows['email']; ?>" readonly/><br /></td>
+        <td >Email</td>
+        <td><input type="text" name="email" id="email" value="<?php echo $rows['email']; ?>" readonly/><br /></td>
       </tr>
 
       <tr>

@@ -4,31 +4,23 @@ $id=$_SESSION['admin_id'];
 $_SESSION['callback_url']=url_for('profile.php?id='.$id);
 
 //select all properties from roomtype 
-$query_str = "SELECT lastName,firstName,email,phoneNumber,country FROM members WHERE memberNumber = ?";
+$query_str = "SELECT lastName,firstName,email,phoneNumber,country, imagePath FROM members WHERE memberNumber = ?";
 			  
 $stmt = $db->prepare($query_str);
 $stmt->bind_param('i',$id);
 $stmt->execute();
-$stmt->bind_result($last1,$first1,$email1,$phone1,$country1);;
-
+$stmt->bind_result($last1,$first1,$email1,$phone1,$country1,$imagePath1);
 
 $page_title = 'Profile';
 include('header.php');
 
-?>
-
-<script>
-	
-</script>
-
-
-<?php
 
 echo "<div class=\"login\">";
 
 //display profile 
 if($stmt->fetch()) {
 	echo "<h4>Hello, $first1 $last1!</h4>\n";
+	echo "<img src=".$imagePath1." width=\"200\" alt=\"$id\" />";
 	echo "<table cellspacing=5><p>";
 	echo "<tr><td>Email</td> <td>|</td> <td>$email1</td></tr>
 	<tr><td>Phone Number</td> <td>|</td> <td>$phone1</td></tr> 
@@ -36,6 +28,8 @@ if($stmt->fetch()) {
 	echo "</p></table><br />";
 }
 $stmt->free_result();
+
+$_SESSION['imagePath'] = $imagePath1;
 
 //updating the info
 echo "\t<button type=\"button\"><a href=\"update.php\">Edit</a></button>";

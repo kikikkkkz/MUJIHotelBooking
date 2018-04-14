@@ -8,10 +8,12 @@ if(is_post_request()&&isset($_POST['create'])) {
   $admin['first_name'] = $_POST['first_name'] ?? '';
   $admin['last_name'] = $_POST['last_name'] ?? '';
   $admin['email'] = $_POST['email'] ?? '';
+  $admin['avatar'] = $_POST['avatar'] ?? '';
   $admin['phone_number'] = $_POST['phone_number'] ?? '';
   $admin['country'] = $_POST['country'] ?? '';
   $admin['password'] = $_POST['password'] ?? '';
   $admin['confirm_password'] = $_POST['confirm_password'] ?? '';
+  //echo $_POST['avatar'];
 
   $result = insert_admin($admin);
   if($result === true) {
@@ -19,11 +21,13 @@ if(is_post_request()&&isset($_POST['create'])) {
     $_SESSION['message'] = 'Account created.';
     $_SESSION['admin_id']=$new_id; //login new account
     $_SESSION['email'] = $admin['email']; //set session email
-    // redirect_to($_SESSION['callback_url']); //return to previous page
+    $_SESSION['imagePath'] = $admin['avatar']; //set session image path
+
     if(isset($_SESSION['callback_url'])){
         $callback_url = $_SESSION['callback_url'];
         header("Location: http://". $_SERVER['SERVER_NAME'] . ":8080". $callback_url);
-    }
+    }    
+   
   } else {
     $errors = $result; //error message
   }
@@ -34,11 +38,12 @@ if(is_post_request()&&isset($_POST['create'])) {
   $admin["first_name"] = '';
   $admin["last_name"] = '';
   $admin["email"] = '';
+  $admin['avatar'] = '';
   $admin["phone_number"] = '';
   $admin["country"] = '';
   $admin['password'] = '';
   $admin['confirm_password'] = '';
-}
+ }
 
 ?>
 
@@ -71,19 +76,20 @@ if(is_post_request()&&isset($_POST['create'])) {
       <div class="create">
       Avatar<br />
       <ul>
-      <li><input type="radio" id="avatar1" name="avatar">
+      <li><input type="radio" id="avatar1" name="avatar" value="images/avatar1.jpg"  <?php if(isset($_POST['avatar']) && $_POST['avatar'] == "images/avatar1.jpg") echo "checked" ;  ?> >
         <label for="avatar1"><img src="images/avatar1.jpg" style="width:200px"/></label>
       </li>
       
       <li>
-       <input type="radio" id="avatar2" name="avatar" >
+       <input type="radio" id="avatar2" name="avatar" value="images/avatar2.jpg" <?php if(isset($_POST['avatar']) && $_POST['avatar'] == "images/avatar2.jpg") echo "checked" ;  ?>>
       <label for="avatar2"><img src="images/avatar2.jpg" style="width:200px"/></label>
      </li>
 
      <li>
-      <input type="radio" id="avatar3" name="avatar" >
+      <input type="radio" id="avatar3" name="avatar" value="images/avatar3.jpg" <?php if(isset($_POST['avatar']) && $_POST['avatar'] == "images/avatar3.jpg") echo "checked" ;  ?>>
       <label for="avatar3"><img src="images/avatar3.jpg" style="width:200px"/></label>   
     </li>
+  </ul>
       </div>
 
       <div class="create">
