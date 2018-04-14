@@ -39,8 +39,7 @@ if ($res->num_rows > 0) {
     echo $checkIn."<br />";
     echo $checkOut."<br />";
     array_push($roomInfo, array($roomNumber,$checkIn,$checkOut));
-    echo "<input class=\"dateFilter\" />";
-    echo "<input class=\"dateFilter\" /><br>";
+    echo "<br><input id=\"dateFilter\" /><br>";
   }
   // echo "<br />";
   //print_r($checkIn);
@@ -55,8 +54,8 @@ echo "<br>";
 ?> 
 
 <body>
-    <!-- <br />Room of Type <?php echo $room;?><input id="datepicker" /> -->  
-    <!-- <br />Room of Type <?php echo $room;?><input id="dateFilterb" />  -->
+    <!-- <br />Room of Type <?php echo $room;?><input id="datepicker" />  
+    <br />Room of Type <?php echo $room;?><input id="dateFilter" />  -->
 
 </body>
 
@@ -80,30 +79,32 @@ echo "<br>";
 // });
 
 //disable specific dates
-// var unavailableDates = ["2018-4-9", "2018-4-14", "2018-4-22", "2018-4-28", "2018-4-30"];
-// //var unavailableDates = <?php echo json_encode($checkIn); ?>;
+var unavailableDates = ["2018-4-9", "2018-4-14", "2018-4-22", "2018-4-28", "2018-4-30"];
+//var unavailableDates = <?php echo json_encode($checkIn); ?>;
 
-// function unavailable(date) {
-//     dateFormat: "yy-mm-dd",
-//     dmy = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-//     if ($.inArray(dmy, unavailableDates) == -1) {
-//         return [true, ""];
-//     } else {
-//         return [false, "", "Unavailable"];
-//     } 
-//        }
+function unavailable(date) {
+    dateFormat: "yy-mm-dd",
+    dmy = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    if ($.inArray(dmy, unavailableDates) == -1) {
+        return [true, ""];
+    } else {
+        return [false, "", "Unavailable"];
+    } 
+       }
        
-//    $(function() {
-//     $("#datepicker").datepicker({
-//         dateFormat: "yy-mm-dd",
-//         beforeShowDay: unavailable
-//     });
+   $(function() {
+    $("#datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        beforeShowDay: unavailable
+    });
    
-//    });
+   });
 
-  //disable a date range
+   //disable a date range
   var startDate = <?php echo json_encode($roomInfo[0][1]); ?>;
   var endDate = <?php echo json_encode($roomInfo[0][2]); ?>;
+  // var startDate = "2018-04-11";
+  // var endDate = "2018-04-22";
   var dateRange = [];
 
   for (var d = new Date(startDate);
@@ -112,14 +113,13 @@ echo "<br>";
                   dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
           }
 
-  $('.dateFilter').datepicker({
+  $('#dateFilter').datepicker({
       beforeShowDay: function (date) {
           var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
           //console.log(dateString);
           return [dateRange.indexOf(dateString) == -1];
       }
   });
-
 </script>
 <!-- <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/redmond/jquery-ui.css" rel="stylesheet" type="text/css" /> -->
     

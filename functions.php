@@ -314,6 +314,10 @@ define("DB_NAME", "hotel");
 
   }
 
+
+
+
+
   //valiadation functions
   function is_blank($value) {
     return !isset($value) || trim($value) === '';
@@ -458,25 +462,5 @@ define("DB_NAME", "hotel");
       db_disconnect($db);
       exit;
     }
-  }
-
-  function delete_comment($id) {
-    global $db;
-
-    $sql = "DELETE FROM comment WHERE ";
-    $sql .= "id='" . db_escape($db, $id) . "' ";
-    
-    $result = mysqli_query($db, $sql);
-    
-    // For DELETE statements, $result is true/false
-    if($result) {
-      return true;
-    } else {
-      // DELETE failed
-      echo mysqli_error($db);
-      db_disconnect($db);
-      exit;
-    }
-
   }
 ?>

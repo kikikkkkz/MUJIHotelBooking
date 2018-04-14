@@ -47,6 +47,8 @@ if($stmt->fetch()) {
     </div>
 	</div>
 <?php
+	// echo "<div id=\"room-image\"><img src=$img[0] width=\"500\" height=\"333\" alt=\"\" /></div>";
+
 
 	echo "<p>";
 	echo "Area $area1 m<sup>2</sup><br>
