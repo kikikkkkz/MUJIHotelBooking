@@ -1,29 +1,19 @@
 <?php
 require_once('initialize.php');
-$page_title = 'Profile';
-include('header.php');
-
 $id=$_SESSION['admin_id'];
 $_SESSION['callback_url']=url_for('profile.php?id='.$id);
 
-<<<<<<< HEAD
 //select all properties from roomtype 
-=======
-//call delete function when delete button is clicked
-if(isset($_POST['delete'])){
-	delete_comment($_POST['hidden']);
-	echo "Delete successfully!";
-	$_POST['delete']='';
-}
-
-//select all properties from the member 
->>>>>>> master
 $query_str = "SELECT lastName,firstName,email,phoneNumber,country, imagePath FROM members WHERE memberNumber = ?";
 			  
 $stmt = $db->prepare($query_str);
 $stmt->bind_param('i',$id);
 $stmt->execute();
 $stmt->bind_result($last1,$first1,$email1,$phone1,$country1,$imagePath1);
+
+$page_title = 'Profile';
+include('header.php');
+
 
 echo "<div class=\"login\">";
 
@@ -52,15 +42,23 @@ while ($row = $res->fetch_assoc()) {
 
 $res->free_result(); 
 
-//display reservation
+?>
+
+
+
+<?php
+
 $query_str = "SELECT bookingNumber, checkInDate, checkOutDate, priceEach, roomType FROM reservation WHERE memberNumber=".$id."";
 			  
 $res = $db->query($query_str);
 
+//display reservation
 echo "<p>";
 echo "<b>Your Reservation</b><br>";
 if($res->num_rows > 0) {
 	while ($row = $res->fetch_assoc()) {
+		// echo "Booking Number ".$row['bookingNumber']." | ".$row['checkInDate']." ~ ".$row['checkOutDate']."<br>";
+		// echo "Type ".$row['roomType']." RMB ".$row['priceEach']."/night<br>";
 		echo "<table cellspacing=5>";
 		echo "<tr><td>Booking Number <b>".$row['bookingNumber']."</b></td> <td>|</td> <td>".$row['checkInDate']." ~ ".$row['checkOutDate']."</td></tr>";
 		echo "<tr><td></td> <td>|</td> <td><b><a href=";
@@ -77,6 +75,7 @@ if($res->num_rows > 0) {
 echo "</p>";
 $res->free_result();
 
+
 echo "<br>";
 
 //display comments posted by the member
@@ -91,29 +90,15 @@ echo "<table cellspacing=5>";
 
 if($res->num_rows > 0) {
 	while ($row = $res->fetch_assoc()) {
-<<<<<<< HEAD
-=======
-		$url=url_for('profile.php');
-		echo "<form action=$url method=POST>";
->>>>>>> master
 		echo "<tr><td>".$row['timePosted']."</td> <td>|</td>"; 
 		echo "<td><b><a href=";
 		echo url_for('roomdetails.php?room='.$row['roomType']);
 		echo ">Type ".$row['roomType']."</a></b></td></tr>";
-<<<<<<< HEAD
 		echo "<tr><td> <td>|</td> </td><td>".$row['content']."</td></tr>";
-=======
-		echo "<tr><td> <td>|</td> </td><td>".$row['content']."</td>";
-		//button for delete comment
-		echo "<td><input class=del type=submit name=delete value=delete></td></tr>";
-		echo "<tr><td><input type=hidden name=hidden value=".$row['id']."></td></tr>";
-		echo "</form>";
->>>>>>> master
 	}
 }else{
 	echo "Haven't posted any comments yet."; //show 0 result it there is nothing matched 
 }
-echo "<div id=msg></div>";
 echo "</p></table>";
 echo "</div>";
 
@@ -124,3 +109,4 @@ include('footer.php');
 
 $db->close();
 ?>
+
