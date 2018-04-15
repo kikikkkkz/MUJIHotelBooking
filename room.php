@@ -16,6 +16,7 @@ $res = $db->query($query_str);
 //list all items
 echo "<div class=\"container\">";
 while($row = $res->fetch_row()){
+	echo "<div class=\"frame\">";
 	echo "<div class=\"box1\">";
 	$img=explode(";",$row[4]);
 	echo "<div id=\"cover-image\"><a href=";	
@@ -32,6 +33,7 @@ while($row = $res->fetch_row()){
 	// echo "$image1";
 	echo "</p>";
 	echo "</div>";
+	echo "</div";
 };
 echo "</div>";
 echo "</div>";
@@ -42,8 +44,13 @@ if(isset($_SESSION['room'])){
 	unset($_SESSION['room']);
 }
 
-include('footer.php');
+
 //release object
 $res->free_result();
 $db->close();
+
+?>
+
+<?php
+ include('footer.php');
 ?>

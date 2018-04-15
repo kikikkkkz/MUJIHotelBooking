@@ -68,11 +68,11 @@ if(is_post_request()) {
     <tr><td><input type="text" name="email" value="<?php echo $email; ?>" /></td></tr>
     <tr><td>Password</td></tr>
     <tr><td><input type="password" name="password" value="" /></td></tr>
-    <tr><td><input type="submit" name="login" value="Login"  /></td></tr>
+    <tr><td><input type="submit" class="btn" name="login" value="Login"  /></td></tr>
     </table>
   </form>
 
-  Not registered yet? <button type="button"><a href="register.php"> Register here</a></button>
+  Not registered yet? <button type="button" class="btn"><a href="register.php"> Register here</a></button>
 
 </div>
 

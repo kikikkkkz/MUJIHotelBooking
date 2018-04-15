@@ -1,26 +1,25 @@
 <?php
 require_once('initialize.php');
+$page_title = 'Profile';
+include('header.php');
+
 $id=$_SESSION['admin_id'];
 $_SESSION['callback_url']=url_for('profile.php?id='.$id);
 
-<<<<<<< HEAD
-=======
+//call delete function when delete button is clicked
 if(isset($_POST['delete'])){
 	delete_comment($_POST['hidden']);
+	echo "Delete successfully!";
+	$_POST['delete']='';
 }
 
->>>>>>> parent of 67336e9... Delete comment
-//select all properties from roomtype 
+//select all properties from the member 
 $query_str = "SELECT lastName,firstName,email,phoneNumber,country, imagePath FROM members WHERE memberNumber = ?";
 			  
 $stmt = $db->prepare($query_str);
 $stmt->bind_param('i',$id);
 $stmt->execute();
 $stmt->bind_result($last1,$first1,$email1,$phone1,$country1,$imagePath1);
-
-$page_title = 'Profile';
-include('header.php');
-
 
 echo "<div class=\"login\">";
 
@@ -37,6 +36,7 @@ if($stmt->fetch()) {
 $stmt->free_result();
 
 $_SESSION['imagePath'] = $imagePath1;
+$_SESSION['firstName'] = $first1; 
 
 //updating the info
 echo "\t<button type=\"button\"><a href=\"update.php\">Edit</a></button>";
@@ -49,23 +49,15 @@ while ($row = $res->fetch_assoc()) {
 
 $res->free_result(); 
 
-?>
-
-
-
-<?php
-
+//display reservation
 $query_str = "SELECT bookingNumber, checkInDate, checkOutDate, priceEach, roomType FROM reservation WHERE memberNumber=".$id."";
 			  
 $res = $db->query($query_str);
 
-//display reservation
 echo "<p>";
 echo "<b>Your Reservation</b><br>";
 if($res->num_rows > 0) {
 	while ($row = $res->fetch_assoc()) {
-		// echo "Booking Number ".$row['bookingNumber']." | ".$row['checkInDate']." ~ ".$row['checkOutDate']."<br>";
-		// echo "Type ".$row['roomType']." RMB ".$row['priceEach']."/night<br>";
 		echo "<table cellspacing=5>";
 		echo "<tr><td>Booking Number <b>".$row['bookingNumber']."</b></td> <td>|</td> <td>".$row['checkInDate']." ~ ".$row['checkOutDate']."</td></tr>";
 		echo "<tr><td></td> <td>|</td> <td><b><a href=";
@@ -82,76 +74,43 @@ if($res->num_rows > 0) {
 echo "</p>";
 $res->free_result();
 
-
 echo "<br>";
 
 //display comments posted by the member
-$query_str = "SELECT content, timePosted, roomType FROM comment WHERE memberNumber = ".$id."";
+$query_str = "SELECT id, content, timePosted, roomType FROM comment WHERE memberNumber = ".$id."";
 			  
 $res = $db->query($query_str);
 
 echo "<p>";
 
+echo "<div id=\"display_comment\">";
 echo "<b>Your Comment</b><br>";
 echo "<table cellspacing=5>";
 
 if($res->num_rows > 0) {
 	while ($row = $res->fetch_assoc()) {
-<<<<<<< HEAD
-=======
-		// echo "<tr><td>".$row['timePosted']."</td> <td>|</td>"; 
-		// echo "<td><b><a href=";
-		// echo url_for('roomdetails.php?room='.$row['roomType']);
-		// echo ">Type ".$row['roomType']."</a></b></td></tr>";
-		// echo "<tr><td> <td>|</td> </td><td>".$row['content']."</td></tr>";
 		$url=url_for('profile.php');
 		echo "<form action=$url method=POST>";
->>>>>>> parent of 67336e9... Delete comment
 		echo "<tr><td>".$row['timePosted']."</td> <td>|</td>"; 
 		echo "<td><b><a href=";
 		echo url_for('roomdetails.php?room='.$row['roomType']);
 		echo ">Type ".$row['roomType']."</a></b></td></tr>";
-<<<<<<< HEAD
-		echo "<tr><td> <td>|</td> </td><td>".$row['content']."</td></tr>";
-=======
 		echo "<tr><td> <td>|</td> </td><td>".$row['content']."</td>";
+		//button for delete comment
 		echo "<td><input class=del type=submit name=delete value=delete></td></tr>";
 		echo "<tr><td><input type=hidden name=hidden value=".$row['id']."></td></tr>";
 		echo "</form>";
->>>>>>> parent of 67336e9... Delete comment
 	}
 }else{
 	echo "Haven't posted any comments yet."; //show 0 result it there is nothing matched 
 }
+echo "<div id=msg></div>";
 echo "</p></table>";
+
+echo "</div>"; //closing the display_comment border
+
 echo "</div>";
 
-?>
-
-<script>
-$(document).ready(function(){
-	
-	load_comment();
-
-	function load_comment()
-	{
-	  $.ajax({
-	   url:"fetch_comment_user.php",
-	   method:"POST",
-	   success:function(data)
-	   {
-	    $('#display_comment').html(data);
-	   }
-	  })
-	}
-
-	
-
-});
-
-</script>
-
-<?php
 
 $res->free_result();
 
@@ -159,4 +118,3 @@ include('footer.php');
 
 $db->close();
 ?>
-

@@ -30,45 +30,38 @@
 
 </head>
 
-<body>
-
-<div class="header">
-	<!-- <img src="images/title.jpg" class="cover" /> -->
-	<a href="<?php echo url_for('search.php'); ?>" class="logo">
-	<img src="images/logo.svg" width="180px" alt="MUJI Hotel" /></a>
-	
-
-	<ul class="main-nav topBotomBordersOut">
-		<a href="<?php echo url_for('search.php'); ?>"><li>Home</li></a>
-		<a href="<?php echo url_for('room.php'); ?>"><li>Rooms</li></a>  
-
-		<?php 
-		//if logged in, show username and logout, otherwise show login
-		if(isset($_SESSION['imagePath'])) {
-			$imagePath=$_SESSION['imagePath'];			
-		}
-		//echo $imagePath;
-
-		if(isset($_SESSION['admin_id'])){
-			if (isset($_SESSION['email'])) {
-				$email=$_SESSION['email'];
-				echo "<a href=\"profile.php\"><li>$email</li>";
-				echo "<li><img src=".$imagePath." width=\"30\"/>";
-				
-				echo "</li></a>";
-			}
-			// echo $_SESSION['email'] ?? '';
-			$url=url_for('logout.php');
-			echo "<a href=\"$url\"> <li>Logout</li></a>";
-		}else{
-			$url=url_for('login.php');
-			echo "<a href=\"$url\"><li>Login/Sign up</li></a>";
-		}
-		?>
-	</ul>
-
+<body> 
+ 
+<header> 
+ <div class="main-nav"> 
+  <!-- <img src="images/title.jpg" class="cover" /> --> 
+  <a href="<?php echo url_for('search.php'); ?>" class="logo"> 
+  <img src="images/logo.svg" width="180px" alt="MUJI Hotel" /></a> 
+  <div class="box topBotomBordersOut"> 
+    <a href="<?php echo url_for('search.php'); ?>">home</a> 
+    <a href="<?php echo url_for('room.php'); ?>">rooms</a> 
+     
+    <?php   
+    //if logged in, show username and logout, otherwise show login 
+    if(isset($_SESSION['imagePath'])) { 
+      $imagePath=$_SESSION['imagePath'];   
+    }
+    if(isset($_SESSION['admin_id'])){ 
+      if (isset($_SESSION['email'])) { 
+        $email=$_SESSION['email']; 
+        echo "<a href=\"profile.php\">$email</a>"; 
+        echo "<img src=".$imagePath." width=\"30\"/>";  
+       } 
+     // echo $_SESSION['email'] ?? ''; 
+     $url=url_for('logout.php'); 
+     echo "<a href=\"$url\">Logout</a>";  
+ }else{ 
+      $url=url_for('login.php'); 
+      echo "<a href=\"$url\">Login/Sign up</a>"; 
+  }
+  ?>
 </div>
-
+</div>
 
 <div class="body">
 

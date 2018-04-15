@@ -114,11 +114,11 @@ if(is_post_request()&&isset($_POST['create'])) {
       
       <br />
 
-      <input type="submit" name="create" value="Create Account" />
+      <input type="submit" class="btn" name="create" value="Create Account" />
   
     <br />
 
-      Already a member? <button type="button"><a class="back-link" href="<?php echo url_for('login.php'); ?>">Login here</a></button>  
+      Already a member? <button class="btn" ><a class="back-link" href="<?php echo url_for('login.php'); ?>">Login here</a></button>  
 
     </form>
 

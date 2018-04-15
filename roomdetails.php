@@ -75,10 +75,10 @@ if(isset($_SESSION['admin_id'])) {
 	<form method="POST" id="comment_form" class="dno">
 	    <div class="form-group">
 	     <input type="hidden" name="comment_type" id="comment_type" value="<?php echo $room;?>" />
-	     <textarea rows="4" cols="50" id="comment_name" name="comment_name"></textarea>
+	     <textarea rows="4" cols="50" id="comment_name" name="comment_name" placeholder="How you feel about our hotel..."></textarea>
 	    </div>
 	    <div class="form-group">
-	     <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
+	     <br /><input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
 	    </div>
    	</form>
    <span id="comment_message"></span>
@@ -177,15 +177,11 @@ function showDivs(n) {
 
 <?php
 
-//check availability
-
-echo "<form action=\"availability.php?room=$room\" method=\"POST\">";
-echo "<input type=\"submit\" value=\"Check Availability\">";
+//start booking 
+echo "<button id=\"book\" class=\"btn\"><a href=\"search.php\">Start Booking</a></button>"; 
 if($_SESSION['callback_url']!=url_for('reservation.php')){
 	$_SESSION['room']=$room; //room viewed on reservation will not be added again 
 }
-echo "</form>";
-
 
 echo "</div>";
 
